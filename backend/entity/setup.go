@@ -12,11 +12,13 @@ func DB() *gorm.DB {
 }
  
 func SetupDatabase() {
-  database, err := gorm.Open(sqlite.Open("sa-64.db"), &gorm.Config{})
+  database, err := gorm.Open(sqlite.Open("se-g07.db"), &gorm.Config{})
   if err != nil {
     panic("failed to connect database")
   }
-  database.AutoMigrate(&User{})
+  database.AutoMigrate(
+    &Semester{},&ExamType{},
+  )
  
   db = database
 
