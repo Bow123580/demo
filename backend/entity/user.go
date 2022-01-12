@@ -1,15 +1,18 @@
 package entity
  
 import (
-  "time"
+//  "time"
   "gorm.io/gorm"
 )
  
-type User struct {
-  gorm.Model
-  FirstName    string
-  LastName     string
-  Email        string
-  Age          uint8
-  BirthDay     time.Time
+type Semester struct {
+	gorm.Model
+	Semester  string
+	//ExamSchedule []ExamSchedule `gorm:"foreignKey:SemesterID"`
+}
+
+type ExamType struct {
+	gorm.Model
+	Type  string
+	//ExamSchedule []ExamSchedule `gorm:"foreignKey:ExamTypeID"`
 }
