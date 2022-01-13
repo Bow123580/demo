@@ -22,4 +22,32 @@ func SetupDatabase() {
  
   db = database
 
+  //Semester Data
+	Semester1 :=Semester{
+		Semester: "ภาคการศึกษาที่ 1",
+	}
+	db.Model(&Semester{}).Create(&Semester1)
+
+	Semester2 :=Semester{
+		Semester: "ภาคการศึกษาที่ 2",
+	}
+	db.Model(&Semester{}).Create(&Semester2)
+
+	Semester3 :=Semester{
+		Semester: "ภาคการศึกษาที่ 3",
+	}
+	db.Model(&Semester{}).Create(&Semester3)
+
+
+	// ExamType Data
+	type1 := ExamType{
+		Type: "กลางภาค",
+	}
+	db.Model(&ExamType{}).Create(&type1)
+
+	type2 := ExamType{
+		Type: "ปลายภาค",
+	}
+	db.Model(&ExamType{}).Create(&type2)
+
 }
