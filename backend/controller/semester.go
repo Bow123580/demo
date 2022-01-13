@@ -26,7 +26,7 @@ func CreateSemester(c *gin.Context) {
 func GetSemester(c *gin.Context) {
 	var Semester entity.Semester
 	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM delivery_types WHERE id = ?", id).Scan(&Semester).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM semesters WHERE id = ?", id).Scan(&Semester).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -37,7 +37,7 @@ func GetSemester(c *gin.Context) {
 // GET /Semesters
 func ListSemesters(c *gin.Context) {
 	var Semesters []entity.Semester
-	if err := entity.DB().Raw("SELECT * FROM delivery_types").Scan(&Semesters).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM semesters").Scan(&Semesters).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -48,7 +48,7 @@ func ListSemesters(c *gin.Context) {
 // DELETE /Semesters/:id
 func DeleteSemester(c *gin.Context) {
 	id := c.Param("id")
-	if tx := entity.DB().Exec("DELETE FROM delivery_types WHERE id = ?", id); tx.RowsAffected == 0 {
+	if tx := entity.DB().Exec("DELETE FROM semesters WHERE id = ?", id); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Semester not found"})
 		return
 	}
