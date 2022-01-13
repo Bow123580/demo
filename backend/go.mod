@@ -1,9 +1,9 @@
-module githud.com/PhatSut/demo
+module github.com/PhatSut/demo
 
 go 1.16
 
 require (
-	github.com/gin-gonic/gin v1.7.7 // indirect
+	github.com/gin-gonic/gin v1.7.7
 	github.com/go-playground/validator/v10 v10.10.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -16,6 +16,6 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gorm.io/driver/sqlite v1.2.6 // indirect
-	gorm.io/gorm v1.22.5 // indirect
+	gorm.io/driver/sqlite v1.2.6
+	gorm.io/gorm v1.22.5
 )
