@@ -1,7 +1,7 @@
 package entity
 
 import (
-	//"time"
+	"time"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -24,34 +24,12 @@ func SetupDatabase() {
  
   db = database
 
-  //Semester Data
-	Semester1 :=Semester{
-		Semester: "ภาคการศึกษาที่ 1",
+	/*
+	teacher1 := Teacher{
+
 	}
-	db.Model(&Semester{}).Create(&Semester1)
-
-	Semester2 :=Semester{
-		Semester: "ภาคการศึกษาที่ 2",
-	}
-	db.Model(&Semester{}).Create(&Semester2)
-
-	Semester3 :=Semester{
-		Semester: "ภาคการศึกษาที่ 3",
-	}
-	db.Model(&Semester{}).Create(&Semester3)
-
-
-	// ExamType Data
-	type1 := ExamType{
-		Type: "กลางภาค",
-	}
-	db.Model(&ExamType{}).Create(&type1)
-
-	type2 := ExamType{
-		Type: "ปลายภาค",
-	}
-	db.Model(&ExamType{}).Create(&type2)
-
+	*/
+  
 	//Course Data
 	course1 := Course{
 		Coursename: "SOFTWARE ENGINEERING",
@@ -84,15 +62,85 @@ func SetupDatabase() {
 	}
 	db.Model(&Course{}).Create(&course6)
 
-	/*exam1 := ExamSchedule{
+	/*program1 :=Program{
+		Program: "Thai Program"
+	}
+	db.Model(&Program{}).Create(&program1) 
+	program2 :=Program{
+		Program: "International Program"
+	}
+	db.Model(&Program{}).Create(&program2) 
+	*/
+
+	//Semester Data
+	Semester1 :=Semester{
+		Semester: "ภาคการศึกษาที่ 1",
+	}
+	db.Model(&Semester{}).Create(&Semester1)
+
+	Semester2 :=Semester{
+		Semester: "ภาคการศึกษาที่ 2",
+	}
+	db.Model(&Semester{}).Create(&Semester2)
+
+	Semester3 :=Semester{
+		Semester: "ภาคการศึกษาที่ 3",
+	}
+	db.Model(&Semester{}).Create(&Semester3)
+
+
+	// ExamType Data
+	type1 := ExamType{
+		Type: "กลางภาค",
+	}
+	db.Model(&ExamType{}).Create(&type1)
+
+	type2 := ExamType{
+		Type: "ปลายภาค",
+	}
+	db.Model(&ExamType{}).Create(&type2)
+
+	/*
+	addcourse1 := AddCourse{
+		Course: course1,
+		Program: program1,
+		Teacher: teacher1,
+		Credit: 4,
+		DayTime: "",
+		SaveTime: time.Now(),
+	}
+	db.Model(&AddCourse{}).Create(&addcourse1)
+
+	*/
+
+	exam1 := ExamSchedule{
 		AcamedicYear: 2564,
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B5204",
-		DateExam: time.Now(),
+		DateExam: 2021-10-02,
 		StartTime: ,
 		EndTime: ,
 	}
-	db.Model(&ExamSchedule{}).Create(&exam1)*/
-
+	db.Model(&ExamSchedule{}).Create(&exam1)
+	exam2 := ExamSchedule{
+		AcamedicYear: 2564,
+		ExamType: type2,
+		Course: course2,
+		RoomExam: "B1125",
+		DateExam: 2021-10-05,
+		StartTime: ,
+		EndTime: ,
+	}
+	db.Model(&ExamSchedule{}).Create(&exam2)
+	exam3 := ExamSchedule{
+		AcamedicYear: 2564,
+		ExamType: type2,
+		Course: course2,
+		RoomExam: "B1122",
+		DateExam: 2021-05-03,
+		StartTime: ,
+		EndTime: ,
+	}
+	db.Model(&ExamSchedule{}).Create(&exam3)
 }
