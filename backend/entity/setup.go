@@ -19,21 +19,49 @@ func SetupDatabase() {
     panic("failed to connect database")
   }
   database.AutoMigrate(
-    &Semester{},&ExamType{},&Course{},&ExamSchedule{},
+    &Teacher{},&Semester{},&ExamType{},&Program{},&Course{},&ExamSchedule{},
   )
  
   db = database
 
-	/*
+	
 	teacher1 := Teacher{
-		TeacherID: T000001,
-		Name: ผู้ช่วยศาสตราจารย์ ดร.ชาญวิทย์ แก้วกสิ,
-		Email: chanwit@gmail.com,
+		TeacherID: "T000001",
+		Name: "ผู้ช่วยศาสตราจารย์ ดร.ชาญวิทย์ แก้วกสิ",
+		Email: "chanwit@gmail.com",
 		Password: "",
-		Prefix: "Mr."
-		Major: "CPE"
+		Prefix: "Mr.",
+		Major: "CPE",
 	}
-	*/
+	db.Model(&Teacher{}).Create(&teacher1)
+	teacher2 := Teacher{
+		TeacherID: "T0023581",
+		Name: "ผู้ช่วยศาสตราจารย์ ดร.นันทวุฒิ คะอังกุ",
+		Email: "nuntawut@gmail.com",
+		Password: "",
+		Prefix: "Mr.",
+		Major: "CPE",
+	}
+	db.Model(&Teacher{}).Create(&teacher2)
+	teacher3 := Teacher{
+		TeacherID: "T0157690",
+		Name: "ผู้ช่วยศาสตราจารย์ ดร.ศรัญญา กาญจนวัฒนา",
+		Email: "sarunya@gmail.com",
+		Password: "",
+		Prefix: "Miss",
+		Major: "CPE",
+	}
+	db.Model(&Teacher{}).Create(&teacher3)
+	teacher4 := Teacher{
+		TeacherID: "T1578952",
+		Name: "ผู้ช่วยศาสตราจารย์ ดร.ปรเมศวร์ ห่อแก้ว",
+		Email: "paramate@gmail.com",
+		Password: "",
+		Prefix: "Mr.",
+		Major: "CPE",
+	}
+	db.Model(&Teacher{}).Create(&teacher4)
+
   
 	//Course Data
 	course1 := Course{
@@ -67,15 +95,15 @@ func SetupDatabase() {
 	}
 	db.Model(&Course{}).Create(&course6)
 
-	/*program1 :=Program{
-		Program: "Thai Program"
+	program1 :=Program{
+		Programname: "Thai Program",
 	}
 	db.Model(&Program{}).Create(&program1) 
 	program2 :=Program{
-		Program: "International Program"
+		Programname: "International Program",
 	}
 	db.Model(&Program{}).Create(&program2) 
-	*/
+	
 
 	//Semester Data
 	Semester1 :=Semester{

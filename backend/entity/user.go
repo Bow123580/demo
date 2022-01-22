@@ -14,21 +14,18 @@ type Student struct {
 	Email      string // `gorm:"uniqueIndex"`
 	Year       uint
 	Password   string
-
-//	withdrawals []Withdrawal `gorm:"foreignKey:StudentID"`
 }
 
 type Teacher struct {
 	gorm.Model
-	ID_steacher string `gorm:"uniqueIndex"`
-	Prefix      string
+	TeacherID string `gorm:"uniqueIndex"`
 	Name        string
-	Major       string
 	Email       string //`gorm:"uniqueIndex"`
 	Password    string
+	Prefix      string
+	Major       string
 
 	AddCourses  []AddCourse  `gorm:"foreignKey:TeacherID"`
-//	withdrawals []Withdrawal `gorm:"foreignKey:TeacherID"`
 }
 
 type Course struct{
