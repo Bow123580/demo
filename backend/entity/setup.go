@@ -19,7 +19,7 @@ func SetupDatabase() {
     panic("failed to connect database")
   }
   database.AutoMigrate(
-    &Teacher{},&Student{},&Semester{},&ExamType{},&Program{},&Course{},&ExamSchedule{},&AddCourse{},
+    &Teacher{},&Student{},&Semester{},&ExamType{},&Program{},&Course{},&ExamSchedule{},&AddCourse{},&RequestStatus{},&Petition{},
   )
  
   db = database
@@ -155,7 +155,6 @@ func SetupDatabase() {
 	}
 	db.Model(&Program{}).Create(&program2) 
 	
-
 	//Semester Data
 	Semester1 :=Semester{
 		Semester: "ภาคการศึกษาที่ 1",
@@ -172,13 +171,33 @@ func SetupDatabase() {
 	}
 	db.Model(&Semester{}).Create(&Semester3)
 
+	status1 := RequestStatus{
+		Status: "รอดำเนินการ",
+	}
+	db.Model(&RequestStatus{}).Create(&status1)
+	status2 := RequestStatus{
+		Status: "กำลังดำเนินการ",
+	}
+	db.Model(&RequestStatus{}).Create(&status2)
+	status3 := RequestStatus{
+		Status: "ดำเนินการสำเร็จแล้ว",
+	}
+	db.Model(&RequestStatus{}).Create(&status3)
+
+	claim1 := Petition{
+		Claim: "เกินกว่าหน่วยกิตกำหนด",
+	}
+	db.Model(&Petition{}).Create(&claim1)
+	claim2 := Petition{
+		Claim: "ต่ำกว่าหน่วยกิตกำหนด",
+	}
+	db.Model(&Petition{}).Create(&claim2)	
 
 	// ExamType Data
 	type1 := ExamType{
 		Type: "กลางภาค",
 	}
 	db.Model(&ExamType{}).Create(&type1)
-
 	type2 := ExamType{
 		Type: "ปลายภาค",
 	}
