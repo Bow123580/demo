@@ -146,6 +146,7 @@ func SetupDatabase() {
 		ID_teacher: "T1578952",
 		Name: "ผู้ช่วยศาสตราจารย์ ดร.ปรเมศวร์ ห่อแก้ว",
 		Email: "paramate@gmail.com",
+
 		Password: "",
 		Prefix: "Mr.",
 		Major: "CPE",
