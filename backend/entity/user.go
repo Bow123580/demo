@@ -5,15 +5,37 @@ import (
   "gorm.io/gorm"
 )
 
-type Teacher struct{
+type Student struct {
 	gorm.Model
-	
+	ID_student string `gorm:"uniqueIndex"`
+	Prefix     string
+	Name       string
+	Major      string
+	Email      string // `gorm:"uniqueIndex"`
+	Year       uint
+	Password   string
+
+//	withdrawals []Withdrawal `gorm:"foreignKey:StudentID"`
+}
+
+type Teacher struct {
+	gorm.Model
+	ID_steacher string `gorm:"uniqueIndex"`
+	Prefix      string
+	Name        string
+	Major       string
+	Email       string //`gorm:"uniqueIndex"`
+	Password    string
+
+	AddCourses  []AddCourse  `gorm:"foreignKey:TeacherID"`
+//	withdrawals []Withdrawal `gorm:"foreignKey:TeacherID"`
 }
 
 type Course struct{
 	gorm.Model
 	Coursename string
 	Coursenumber int32
+
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
 	AddCourse []AddCourse `gorm:"foreignKey:CourseID"`
 }
@@ -21,18 +43,21 @@ type Course struct{
 type Program struct{
 	gorm.Model
 	Programname string
+
 	AddCourse []AddCourse `gorm:"foreignKey:ProgramID"`
 }
 
 type Semester struct {
 	gorm.Model
 	Semester  string
+
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:SemesterID"`
 }
 
 type ExamType struct {
 	gorm.Model
 	Type  string
+
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:ExamTypeID"`
 }
 

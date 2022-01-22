@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"time"
+//	"time"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -26,7 +26,12 @@ func SetupDatabase() {
 
 	/*
 	teacher1 := Teacher{
-
+		TeacherID: T000001,
+		Name: ผู้ช่วยศาสตราจารย์ ดร.ชาญวิทย์ แก้วกสิ,
+		Email: chanwit@gmail.com,
+		Password: "",
+		Prefix: "Mr."
+		Major: "CPE"
 	}
 	*/
   
@@ -113,34 +118,37 @@ func SetupDatabase() {
 
 	*/
 
-	exam1 := ExamSchedule{
+	/*exam1 := ExamSchedule{
+		Semester: Semester1,
 		AcamedicYear: 2564,
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B5204",
-		DateExam: 2021-10-02,
-		StartTime: ,
-		EndTime: ,
+		DateExam: 2021-12-05,
+		StartTime: time.Now(),
+		EndTime: time.Now(),
 	}
 	db.Model(&ExamSchedule{}).Create(&exam1)
 	exam2 := ExamSchedule{
+		Semester: Semester2,
 		AcamedicYear: 2564,
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B1125",
-		DateExam: 2021-10-05,
-		StartTime: ,
-		EndTime: ,
+		DateExam: time.Now(),
+		StartTime: time.Now(),
+		EndTime: time.Now(),
 	}
 	db.Model(&ExamSchedule{}).Create(&exam2)
 	exam3 := ExamSchedule{
+		Semester: Semester3,
 		AcamedicYear: 2564,
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B1122",
-		DateExam: 2021-05-03,
-		StartTime: ,
-		EndTime: ,
+		DateExam: time.NewTimer(),
+		StartTime: time.Now(),
+		EndTime: time.Now(),
 	}
-	db.Model(&ExamSchedule{}).Create(&exam3)
+	db.Model(&ExamSchedule{}).Create(&exam3)*/
 }
