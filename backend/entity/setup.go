@@ -19,19 +19,58 @@ func SetupDatabase() {
     panic("failed to connect database")
   }
   database.AutoMigrate(
-    &Teacher{},&Student{},&Semester{},&ExamType{},&Program{},&Course{},&ExamSchedule{},&AddCourse{},&RequestStatus{},&Petition{},
+    &Teacher{},
+	&Student{},
+	&Semester{},
+	&ExamType{},
+	&Program{},
+	&Course{},
+	&ExamSchedule{},
+	&AddCourse{},
+	&RequestStatus{},
+	&Petition{},
+	&Registrar{},
   )
  
   db = database
 
-  student1 := Student{
-	ID_student: "B6202385",
-	Prefix: "Miss",
-	Name: "Phatcha Sisuwo",
-	Major: "CPE",
-	Year: 3,
-	Email: "phatcha@gmail.com",
-	Password: "",
+/*  	registrar1 := Registrar{
+		ID_registrar: "R5678912",
+		Name: "",
+		Email: "@gmail.com",
+		Password: "",
+	}
+	db.Model(&Registrar{}).Create(&registrar1)
+	registrar2 := Registrar{
+		ID_registrar: "R2034567",
+		Name: "",
+		Email: "@gmail.com",
+		Password: "",
+	}
+	db.Model(&Registrar{}).Create(&registrar2)
+	registrar3 := Registrar{
+		ID_registrar: "R",
+		Name: "",
+		Email: "@gmail.com",
+		Password: "",
+	}
+	db.Model(&Registrar{}).Create(&registrar3)
+	registrar4 := Registrar{
+		ID_registrar: "R",
+		Name: "",
+		Email: "@gmail.com",
+		Password: "",
+	}
+	db.Model(&Registrar{}).Create(&registrar4)*/
+
+	student1 := Student{
+		ID_student: "B6202385",
+		Prefix: "Miss",
+		Name: "Phatcha Sisuwo",
+		Major: "CPE",
+		Year: 3,
+		Email: "phatcha@gmail.com",
+		Password: "",
 	}
 	db.Model(&Student{}).Create(&student1)
 	student2 := Student{
@@ -146,6 +185,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Course{}).Create(&course6)
 
+	// Program data
 	program1 :=Program{
 		Programname: "Thai Program",
 	}
@@ -171,6 +211,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Semester{}).Create(&Semester3)
 
+	//
 	status1 := RequestStatus{
 		Status: "รอดำเนินการ",
 	}
@@ -184,6 +225,7 @@ func SetupDatabase() {
 	}
 	db.Model(&RequestStatus{}).Create(&status3)
 
+	//
 	claim1 := Petition{
 		Claim: "เกินกว่าหน่วยกิตกำหนด",
 	}
@@ -202,7 +244,43 @@ func SetupDatabase() {
 		Type: "ปลายภาค",
 	}
 	db.Model(&ExamType{}).Create(&type2)
+	
+	/*
+	grade1 := Grades{
+		grade: "A",
+	}
+	db.Model(&Grades{}).Create(&grade1)
+	grade2 := Grades{
+		grade: "B+",
+	}
+	db.Model(&Grades{}).Create(&grade2)
+	grade3 := Grades{
+		grade: "B",
+	}
+	db.Model(&Grades{}).Create(&grade3)	
+	grade4 := Grades{
+		grade: "C+",
+	}
+	db.Model(&Grades{}).Create(&grade4)	
+	grade5 := Grades{
+		grade: "C",
+	}
+	db.Model(&Grades{}).Create(&grade5)	
+	grade6 := Grades{
+		grade: "D+",
+	}
+	db.Model(&Grades{}).Create(&grade6)	
+	grade7 := Grades{
+		grade: "D",
+	}
+	db.Model(&Grades{}).Create(&grade7)
+	grade8 := Grades{
+		grade: "F",
+	}
+	db.Model(&Grades{}).Create(&grade8)			
+	*/
 
+	// AddCourse data
 	addcourse1 := AddCourse{
 		Course: course1,
 		Program: program1,
@@ -231,7 +309,7 @@ func SetupDatabase() {
 	}
 	db.Model(&AddCourse{}).Create(&addcourse3)
 
-
+	// ExamSchedule data
 	exam1 := ExamSchedule{
 		Semester: Semester1,
 		AcamedicYear: 2564,

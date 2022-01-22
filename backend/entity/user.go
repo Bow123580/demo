@@ -5,6 +5,15 @@ import (
   "gorm.io/gorm"
 )
 
+type Registrar struct{
+	gorm.Model
+	ID_registrar string `gorm:"uniqueIndex"`
+	Name        string
+	Email       string //`gorm:"uniqueIndex"`
+	Password    string
+
+}
+
 type Student struct {
 	gorm.Model
 	ID_student string `gorm:"uniqueIndex"`
