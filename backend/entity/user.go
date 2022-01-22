@@ -11,7 +11,6 @@ type Registrar struct{
 	Name        string
 	Email       string //`gorm:"uniqueIndex"`
 	Password    string
-
 }
 
 type Student struct {

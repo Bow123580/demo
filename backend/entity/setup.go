@@ -287,7 +287,7 @@ func SetupDatabase() {
 		Program: program1,
 		Teacher: teacher1,
 		Credit: 4,
-		DayTime: "",
+		DayTime: "TUE 13:00-15:00",
 		SaveTime: time.Now(),
 	}
 	db.Model(&AddCourse{}).Create(&addcourse1)
@@ -296,7 +296,7 @@ func SetupDatabase() {
 		Program: program1,
 		Teacher: teacher3,
 		Credit: 4,
-		DayTime: "",
+		DayTime: "THU 10:00-12:00",
 		SaveTime: time.Now(),
 	}
 	db.Model(&AddCourse{}).Create(&addcourse2)
@@ -305,7 +305,7 @@ func SetupDatabase() {
 		Program: program1,
 		Teacher: teacher4,
 		Credit: 4,
-		DayTime: "",
+		DayTime: "FRI 13:00-16:00",
 		SaveTime: time.Now(),
 	}
 	db.Model(&AddCourse{}).Create(&addcourse3)
@@ -317,9 +317,6 @@ func SetupDatabase() {
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B5204",
-		DateExam: time.Now(),
-		StartTime: time.Now(),
-		EndTime: time.Now(),
 	}
 	db.Model(&ExamSchedule{}).Create(&exam1)
 	exam2 := ExamSchedule{
@@ -328,9 +325,6 @@ func SetupDatabase() {
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B1125",
-		DateExam: time.Now(),
-		StartTime: time.Now(),
-		EndTime: time.Now(),
 	}
 	db.Model(&ExamSchedule{}).Create(&exam2)
 	exam3 := ExamSchedule{
@@ -339,9 +333,6 @@ func SetupDatabase() {
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B1122",
-		DateExam: time.Now(),
-		StartTime: time.Now(),
-		EndTime: time.Now(),
 	}
 	db.Model(&ExamSchedule{}).Create(&exam3)
 }
