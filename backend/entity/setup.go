@@ -203,7 +203,6 @@ func SetupDatabase() {
 	}
 	db.Model(&ExamType{}).Create(&type2)
 
-	
 	addcourse1 := AddCourse{
 		Course: course1,
 		Program: program1,
@@ -233,13 +232,13 @@ func SetupDatabase() {
 	db.Model(&AddCourse{}).Create(&addcourse3)
 
 
-	/*exam1 := ExamSchedule{
+	exam1 := ExamSchedule{
 		Semester: Semester1,
 		AcamedicYear: 2564,
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B5204",
-		DateExam: 2021-12-05,
+		DateExam: time.Now(),
 		StartTime: time.Now(),
 		EndTime: time.Now(),
 	}
@@ -261,9 +260,9 @@ func SetupDatabase() {
 		ExamType: type2,
 		Course: course2,
 		RoomExam: "B1122",
-		DateExam: time.NewTimer(),
+		DateExam: time.Now(),
 		StartTime: time.Now(),
 		EndTime: time.Now(),
 	}
-	db.Model(&ExamSchedule{}).Create(&exam3)*/
+	db.Model(&ExamSchedule{}).Create(&exam3)
 }
