@@ -1,7 +1,7 @@
 package entity
 
 import (
-//	"time"
+	"time"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -19,14 +19,65 @@ func SetupDatabase() {
     panic("failed to connect database")
   }
   database.AutoMigrate(
-    &Teacher{},&Semester{},&ExamType{},&Program{},&Course{},&ExamSchedule{},
+    &Teacher{},&Student{},&Semester{},&ExamType{},&Program{},&Course{},&ExamSchedule{},&AddCourse{},
   )
  
   db = database
 
+  student1 := Student{
+	ID_student: "B6202385",
+	Prefix: "Miss",
+	Name: "Phatcha Sisuwo",
+	Major: "CPE",
+	Year: 3,
+	Email: "phatcha@gmail.com",
+	Password: "",
+	}
+	db.Model(&Student{}).Create(&student1)
+	student2 := Student{
+		ID_student: "B6202743",
+		Prefix: "Miss",
+		Name: "Narudee Arunno",
+		Major: "CPE",
+		Year: 3,
+		Email: "narudee@gmail.com",
+		Password: "",
+	}
+	db.Model(&Student{}).Create(&student2)
+	student3 := Student{
+		ID_student: "B6214449",
+		Prefix: "Miss",
+		Name: "Suwanan Thamsui",
+		Major: "CPE",
+		Year: 3,
+		Email: "suwanan@gmail.com",
+		Password: "",
+	}
+	db.Model(&Student{}).Create(&student3)
+	student4 := Student{
+		ID_student: "B6230760",
+		Prefix: "Miss",
+		Name: "Patnarin Aiewchoei",
+		Major: "CPE",
+		Year: 3,
+		Email: "patnarin@gmail.com",
+		Password: "",
+	}
+	db.Model(&Student{}).Create(&student4)
+	student5 := Student{
+		ID_student: "B5924615",
+		Prefix: "Mr.",
+		Name: "Patnarin Aiewchoei",
+		Major: "CPE",
+		Year: 3,
+		Email: "Pawarit Praneetponkrang",
+		Password: "",
+	}
+	db.Model(&Student{}).Create(&student5)
+
 	
 	teacher1 := Teacher{
-		TeacherID: "T000001",
+		ID_teacher: "T000001",
 		Name: "ผู้ช่วยศาสตราจารย์ ดร.ชาญวิทย์ แก้วกสิ",
 		Email: "chanwit@gmail.com",
 		Password: "",
@@ -35,7 +86,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Teacher{}).Create(&teacher1)
 	teacher2 := Teacher{
-		TeacherID: "T0023581",
+		ID_teacher: "T0023581",
 		Name: "ผู้ช่วยศาสตราจารย์ ดร.นันทวุฒิ คะอังกุ",
 		Email: "nuntawut@gmail.com",
 		Password: "",
@@ -44,7 +95,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Teacher{}).Create(&teacher2)
 	teacher3 := Teacher{
-		TeacherID: "T0157690",
+		ID_teacher: "T0157690",
 		Name: "ผู้ช่วยศาสตราจารย์ ดร.ศรัญญา กาญจนวัฒนา",
 		Email: "sarunya@gmail.com",
 		Password: "",
@@ -53,7 +104,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Teacher{}).Create(&teacher3)
 	teacher4 := Teacher{
-		TeacherID: "T1578952",
+		ID_teacher: "T1578952",
 		Name: "ผู้ช่วยศาสตราจารย์ ดร.ปรเมศวร์ ห่อแก้ว",
 		Email: "paramate@gmail.com",
 		Password: "",
@@ -133,7 +184,7 @@ func SetupDatabase() {
 	}
 	db.Model(&ExamType{}).Create(&type2)
 
-	/*
+	
 	addcourse1 := AddCourse{
 		Course: course1,
 		Program: program1,
@@ -143,8 +194,25 @@ func SetupDatabase() {
 		SaveTime: time.Now(),
 	}
 	db.Model(&AddCourse{}).Create(&addcourse1)
+	addcourse2 := AddCourse{
+		Course: course3,
+		Program: program1,
+		Teacher: teacher3,
+		Credit: 4,
+		DayTime: "",
+		SaveTime: time.Now(),
+	}
+	db.Model(&AddCourse{}).Create(&addcourse2)
+	addcourse3 := AddCourse{
+		Course: course2,
+		Program: program1,
+		Teacher: teacher4,
+		Credit: 4,
+		DayTime: "",
+		SaveTime: time.Now(),
+	}
+	db.Model(&AddCourse{}).Create(&addcourse3)
 
-	*/
 
 	/*exam1 := ExamSchedule{
 		Semester: Semester1,

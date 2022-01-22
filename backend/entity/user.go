@@ -18,7 +18,7 @@ type Student struct {
 
 type Teacher struct {
 	gorm.Model
-	TeacherID string `gorm:"uniqueIndex"`
+	ID_teacher string `gorm:"uniqueIndex"`
 	Name        string
 	Email       string //`gorm:"uniqueIndex"`
 	Password    string
