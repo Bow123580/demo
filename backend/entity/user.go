@@ -58,6 +58,16 @@ type ExamType struct {
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:ExamTypeID"`
 }
 
+type RequestStatus struct{
+	gorm.Model
+	Status string
+}
+
+type Petition struct{
+	gorm.Model
+	Claim string
+}
+
 type AddCourse struct{
 	gorm.Model
 	Credit int16
