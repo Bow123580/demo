@@ -17,6 +17,7 @@ func main() {
 	{
 		protected := api.Use(middlewares.Authorizes())
 		{
+<<<<<<< HEAD
 			// Student Routes
 			protected.GET("/students", controller.ListStudents)
 			protected.GET("/students/:id", controller.ListStudent)
@@ -37,6 +38,8 @@ func main() {
 			protected.POST("/registrar", controller.CreateRegistrar)
 			protected.PATCH("/registrars", controller.UpdateRegistrar)
 			protected.DELETE("/registrars/:id", controller.DeleteRegistrar)
+=======
+>>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 
 			// Semester Routes
 			protected.GET("/semesters", controller.ListSemester)
@@ -46,6 +49,7 @@ func main() {
 			protected.DELETE("/semesters/:id", controller.DeleteSemester)
 
 			// ExamType Routes
+<<<<<<< HEAD
 			protected.GET("/examtypes", controller.ListExamTypes)
 			protected.GET("/examtype/:id", controller.GetExamType)
 			protected.POST("/examtypes", controller.CreateExamType)
@@ -81,6 +85,56 @@ func main() {
 			protected.PATCH("/withdrawals", controller.UpdateWithdrawal)
 			protected.DELETE("/withdrawals/:id", controller.DeleteWithdrawal)
 
+=======
+			r.GET("/examtypes", controller.ListExamTypes)
+			r.GET("/examtype/:id", controller.GetExamType)
+			r.POST("/examtypes", controller.CreateExamType)
+			r.PATCH("/examtypes", controller.UpdateExamType)
+			r.DELETE("/examtypes/:id", controller.DeleteExamType)
+
+			// Course Routes
+			r.GET("/courses", controller.ListCourses)
+			r.GET("/course/:id", controller.GetCourse)
+			r.POST("/courses", controller.CreateCourse)
+			r.PATCH("/courses", controller.UpdateCourse)
+			r.DELETE("/courses/:id", controller.DeleteCourse)
+
+			// Student Routes
+			protected.GET("/students", controller.ListStudents)
+			protected.GET("/students/:id", controller.ListStudent)
+			protected.GET("/student/:id", controller.GetStudent)
+			protected.PATCH("/students", controller.UpdateStudent)
+			protected.DELETE("/students/:id", controller.DeleteStudent)
+
+			// Teaher Routes
+			protected.GET("/teachers/:id", controller.ListTeacher)
+			protected.GET("/teacher/:id", controller.GetTeacher)
+			protected.POST("/teacher", controller.CreateTeacher)
+			protected.PATCH("/teachers", controller.UpdateTeacher)
+			protected.DELETE("/teachers/:id", controller.DeleteTeacher)
+
+			// Registrar Routes
+			protected.GET("/registrars/:id", controller.ListRegistrar)
+			protected.GET("/registrar/:id", controller.GetRegistrar)
+			protected.POST("/registrar", controller.CreateRegistrar)
+			protected.PATCH("/registrars", controller.UpdateRegistrar)
+			protected.DELETE("/registrars/:id", controller.DeleteRegistrar)
+
+			// examschedule Routes
+			protected.GET("/examschedules", controller.ListExamSchedules)
+			protected.GET("/examschedule/:id", controller.GetExamSchedule)
+			protected.POST("/examschedules", controller.CreateExamSchedule)
+			protected.PATCH("/examschedules", controller.UpdateExamSchedule)
+			protected.DELETE("/examschedules/:id", controller.DeleteExamSchedule)
+
+			// Withdrwals Routes
+			protected.GET("/withdrwals", controller.ListWithdrawals)
+			protected.GET("/withdrwals/:id", controller.ListWithdrawal)
+			protected.GET("/withdrwal/:id", controller.GetWithdrwal)
+			protected.POST("/withdrwal", controller.CreateWithdrawal)
+			protected.PATCH("/withdrwals", controller.UpdateWithdrawal)
+			protected.DELETE("/withdrwals/:id", controller.DeleteWithdrawal)
+>>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 		}
 	}
 

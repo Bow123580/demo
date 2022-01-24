@@ -4,11 +4,11 @@ import { SemestersInterface } from "./ISemester";
 
 export interface ExamScheduleInterface {
     ID: number,
-    AcamedicYeear : number,
+    AcamedicYear : number,
     RoomExam: string,
     DateExam: Date,
-    StartTime: TimeRanges,
-    EndTime: TimeRanges,
+    StartTime: Date,
+    EndTime: Date,
     SemesterID: number,
     Semester: SemestersInterface,
     ExamTypeID: number,

@@ -20,6 +20,7 @@ import Button from "@material-ui/core/Button";
 
 import HomeIcon from "@material-ui/icons/Home";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+<<<<<<< HEAD
 
 import Home from "./components/Home";
 import SignIn from "./components/Signin";
@@ -30,6 +31,17 @@ import Withdrawals from "./components/Withdrawal";
 import WithdrawalCreate from "./components/WithdrawalCreate";
 import AddCourses from "./components/AddCourses";
 import AddCourseCreate from "./components/AddCourseCreate";
+=======
+import EventNoteIcon from '@mui/icons-material/EventNote';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+
+
+import Home from "./components/Home";
+import SignIn from "./components/Signin";
+import { StudentsInterface } from "./models/IStudent";
+import ExamScheduleCreate from "./components/ExamScheduleCreate";
+import ExamSchedules from "./components/ExamSchedule";
+>>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 
 const drawerWidth = 240;
 
@@ -120,10 +132,15 @@ export default function MiniDrawer() {
 
   const menu = [
     { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
+<<<<<<< HEAD
     { name: "นักศึกษา", icon: <AccountCircleIcon />, path: "/students" },
     { name: "นายทะเบียน", icon: <AccountCircleIcon />, path: "/registrars" },
     { name: "นายทะเบียน", icon: <AccountCircleIcon />, path: "/withdrawal" },
 
+=======
+    { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon/>, path: "/examschedule/create" },
+    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon/>, path: "/" },
+>>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
   ];
 
   useEffect(() => {
@@ -218,6 +235,7 @@ export default function MiniDrawer() {
           <div>
             <Switch>
               <Route exact path="/" component={Home} />
+<<<<<<< HEAD
               <Route exact path="/students" component={Students} />
               <Route exact path="/registrars" component={Registrars} />
               <Route exact path="/withdrawal" component={Withdrawals} />
@@ -225,6 +243,10 @@ export default function MiniDrawer() {
               <Route exact path="/addcourse" component={AddCourses} />
               <Route exact path="/addcourse/create" component={AddCourseCreate} />
 
+=======
+              <Route exact path="/examschedule" component={ExamSchedules} />
+              <Route exact path="/examschedule/create" component={ExamScheduleCreate} />
+>>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
             </Switch>
           </div>
         </main>
