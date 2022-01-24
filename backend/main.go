@@ -32,7 +32,7 @@ func main() {
 			protected.DELETE("/teachers/:id", controller.DeleteTeacher)
 
 			// Registrar Routes
-			protected.GET("/registrars/:id", controller.ListRegistrar)
+			protected.GET("/registrars", controller.ListRegistrar)
 			protected.GET("/registrar/:id", controller.GetRegistrar)
 			protected.POST("/registrar", controller.CreateRegistrar)
 			protected.PATCH("/registrars", controller.UpdateRegistrar)
@@ -94,7 +94,7 @@ func main() {
 	// Run the server
 	r.Run()
 }
- 
+
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")

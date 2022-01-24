@@ -11,17 +11,6 @@ import (
 // List all registrars
 func ListRegistrar(c *gin.Context) {
 	var registrars []entity.Registrar
-	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM registrars where id = ? ", id).Scan(&registrars).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-
-	c.JSON(http.StatusOK, gin.H{"data": registrars})
-}
-
-func ListRegistrars(c *gin.Context) {
-	var registrars []entity.Registrar
 	if err := entity.DB().Raw("SELECT * FROM registrars ").Scan(&registrars).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
