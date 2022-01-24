@@ -3,6 +3,7 @@ package entity
 import (
 	"time"
 
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -27,131 +28,138 @@ func SetupDatabase() {
 	&Course{},
 	&ExamSchedule{},
 	&AddCourse{},
-	&RequestStatus{},
-	&Petition{},
+	//&RequestStatus{},
+	//&Petition{},
 	&Registrar{},
   )
  
   db = database
 
-/*  	registrar1 := Registrar{
-		ID_registrar: "R5678912",
-		Name: "",
-		Email: "@gmail.com",
-		Password: "",
-	}
-	db.Model(&Registrar{}).Create(&registrar1)
-	registrar2 := Registrar{
-		ID_registrar: "R2034567",
-		Name: "",
-		Email: "@gmail.com",
-		Password: "",
-	}
-	db.Model(&Registrar{}).Create(&registrar2)
-	registrar3 := Registrar{
-		ID_registrar: "R",
-		Name: "",
-		Email: "@gmail.com",
-		Password: "",
-	}
-	db.Model(&Registrar{}).Create(&registrar3)
-	registrar4 := Registrar{
-		ID_registrar: "R",
-		Name: "",
-		Email: "@gmail.com",
-		Password: "",
-	}
-	db.Model(&Registrar{}).Create(&registrar4)*/
+  password, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
 
-	student1 := Student{
-		ID_student: "B6202385",
-		Prefix: "Miss",
-		Name: "Phatcha Sisuwo",
-		Major: "CPE",
-		Year: 3,
-		Email: "phatcha@gmail.com",
-		Password: "",
-	}
-	db.Model(&Student{}).Create(&student1)
-	student2 := Student{
-		ID_student: "B6202743",
-		Prefix: "Miss",
-		Name: "Narudee Arunno",
-		Major: "CPE",
-		Year: 3,
-		Email: "narudee@gmail.com",
-		Password: "",
-	}
-	db.Model(&Student{}).Create(&student2)
-	student3 := Student{
-		ID_student: "B6214449",
-		Prefix: "Miss",
-		Name: "Suwanan Thamsui",
-		Major: "CPE",
-		Year: 3,
-		Email: "suwanan@gmail.com",
-		Password: "",
-	}
-	db.Model(&Student{}).Create(&student3)
-	student4 := Student{
-		ID_student: "B6230760",
-		Prefix: "Miss",
-		Name: "Patnarin Aiewchoei",
-		Major: "CPE",
-		Year: 3,
-		Email: "patnarin@gmail.com",
-		Password: "",
-	}
-	db.Model(&Student{}).Create(&student4)
-	student5 := Student{
-		ID_student: "B5924615",
-		Prefix: "Mr.",
-		Name: "Patnarin Aiewchoei",
-		Major: "CPE",
-		Year: 3,
-		Email: "Pawarit Praneetponkrang",
-		Password: "",
-	}
-	db.Model(&Student{}).Create(&student5)
+  registrar1 := Registrar{
+	  ID_registrar: "R5678912",
+	  Name:         "Fasai Jangloei",
+	  Email:        "fj@gmail.com",
+	  Password:     string(password),
+  }
+  db.Model(&Registrar{}).Create(&registrar1)
 
-	
-	teacher1 := Teacher{
-		ID_teacher: "T000001",
-		Name: "ผู้ช่วยศาสตราจารย์ ดร.ชาญวิทย์ แก้วกสิ",
-		Email: "chanwit@gmail.com",
-		Password: "",
-		Prefix: "Mr.",
-		Major: "CPE",
-	}
-	db.Model(&Teacher{}).Create(&teacher1)
-	teacher2 := Teacher{
-		ID_teacher: "T0023581",
-		Name: "ผู้ช่วยศาสตราจารย์ ดร.นันทวุฒิ คะอังกุ",
-		Email: "nuntawut@gmail.com",
-		Password: "",
-		Prefix: "Mr.",
-		Major: "CPE",
-	}
-	db.Model(&Teacher{}).Create(&teacher2)
-	teacher3 := Teacher{
-		ID_teacher: "T0157690",
-		Name: "ผู้ช่วยศาสตราจารย์ ดร.ศรัญญา กาญจนวัฒนา",
-		Email: "sarunya@gmail.com",
-		Password: "",
-		Prefix: "Miss",
-		Major: "CPE",
-	}
-	db.Model(&Teacher{}).Create(&teacher3)
-	teacher4 := Teacher{
-		ID_teacher: "T1578952",
-		Name: "ผู้ช่วยศาสตราจารย์ ดร.ปรเมศวร์ ห่อแก้ว",
-		Email: "paramate@gmail.com",
+  registrar2 := Registrar{
+	  ID_registrar: "R2034567",
+	  Name:         "Sompong Naja",
+	  Email:        "sn@gmail.com",
+	  Password:     string(password),
+  }
+  db.Model(&Registrar{}).Create(&registrar2)
 
-		Password: "",
-		Prefix: "Mr.",
-		Major: "CPE",
-	}
-	db.Model(&Teacher{}).Create(&teacher4)
+  registrar3 := Registrar{
+	  ID_registrar: "R1234567",
+	  Name:         "Meta  Kunwat",
+	  Email:        "mk@gmail.com",
+	  Password:     string(password),
+  }
+  db.Model(&Registrar{}).Create(&registrar3)
+
+  registrar4 := Registrar{
+	  ID_registrar: "R2345678",
+	  Name:         "Apiwat Sompung",
+	  Email:        "ap@gmail.com",
+	  Password:     string(password),
+  }
+  db.Model(&Registrar{}).Create(&registrar4)
+
+  student1 := Student{
+	  ID_student: "B6202385",
+	  Prefix:     "Miss",
+	  Name:       "Phatcha Sisuwo",
+	  Major:      "CPE",
+	  Year:       3,
+	  Email:      "phatcha@gmail.com",
+	  Password:   string(password),
+  }
+  db.Model(&Student{}).Create(&student1)
+
+  student2 := Student{
+	  ID_student: "B6202743",
+	  Prefix:     "Miss",
+	  Name:       "Narudee Arunno",
+	  Major:      "CPE",
+	  Year:       3,
+	  Email:      "narudee@gmail.com",
+	  Password:   string(password),
+  }
+  db.Model(&Student{}).Create(&student2)
+
+  student3 := Student{
+	  ID_student: "B6214449",
+	  Prefix:     "Miss",
+	  Name:       "Suwanan Thamsui",
+	  Major:      "CPE",
+	  Year:       3,
+	  Email:      "suwanan@gmail.com",
+	  Password:   string(password),
+  }
+  db.Model(&Student{}).Create(&student3)
+
+  student4 := Student{
+	  ID_student: "B6230760",
+	  Prefix:     "Miss",
+	  Name:       "Patnarin Aiewchoei",
+	  Major:      "CPE",
+	  Year:       3,
+	  Email:      "patnarin@gmail.com",
+	  Password:   string(password),
+  }
+  db.Model(&Student{}).Create(&student4)
+
+  student5 := Student{
+	  ID_student: "B5924615",
+	  Prefix:     "Mr.",
+	  Name:       "Pawarit Praneetponkrang",
+	  Major:      "CPE",
+	  Year:       3,
+	  Email:      "pawarit@gmail.com",
+	  Password:   string(password),
+  }
+  db.Model(&Student{}).Create(&student5)
+
+  teacher1 := Teacher{
+	  ID_teacher: "T000001",
+	  Name:       "ผู้ช่วยศาสตราจารย์ ดร.ชาญวิทย์ แก้วกสิ",
+	  Email:      "chanwit@gmail.com",
+	  Password:   string(password),
+	  Prefix:     "Mr.",
+	  Major:      "CPE",
+  }
+  db.Model(&Teacher{}).Create(&teacher1)
+  teacher2 := Teacher{
+	  ID_teacher: "T0023581",
+	  Name:       "ผู้ช่วยศาสตราจารย์ ดร.นันทวุฒิ คะอังกุ",
+	  Email:      "nuntawut@gmail.com",
+	  Password:   string(password),
+	  Prefix:     "Mr.",
+	  Major:      "CPE",
+  }
+  db.Model(&Teacher{}).Create(&teacher2)
+  teacher3 := Teacher{
+	  ID_teacher: "T0157690",
+	  Name:       "ผู้ช่วยศาสตราจารย์ ดร.ศรัญญา กาญจนวัฒนา",
+	  Email:      "sarunya@gmail.com",
+	  Password:   string(password),
+	  Prefix:     "Miss",
+	  Major:      "CPE",
+  }
+  db.Model(&Teacher{}).Create(&teacher3)
+  teacher4 := Teacher{
+	  ID_teacher: "T1578952",
+	  Name:       "ผู้ช่วยศาสตราจารย์ ดร.ปรเมศวร์ ห่อแก้ว",
+	  Email:      "paramate@gmail.com",
+	  Password:   string(password),
+	  Prefix:     "Mr.",
+	  Major:      "CPE",
+  }
+  db.Model(&Teacher{}).Create(&teacher4)
 
   
 	//Course Data
@@ -212,7 +220,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Semester{}).Create(&Semester3)
 
-	//
+	/*
 	status1 := RequestStatus{
 		Status: "รอดำเนินการ",
 	}
@@ -234,7 +242,7 @@ func SetupDatabase() {
 	claim2 := Petition{
 		Claim: "ต่ำกว่าหน่วยกิตกำหนด",
 	}
-	db.Model(&Petition{}).Create(&claim2)	
+	db.Model(&Petition{}).Create(&claim2)	*/
 
 	// ExamType Data
 	type1 := ExamType{
@@ -309,30 +317,4 @@ func SetupDatabase() {
 		SaveTime: time.Now(),
 	}
 	db.Model(&AddCourse{}).Create(&addcourse3)
-
-	// ExamSchedule data
-	exam1 := ExamSchedule{
-		Semester: Semester1,
-		AcamedicYear: 2564,
-		ExamType: type2,
-		Course: course2,
-		RoomExam: "B5204",
-	}
-	db.Model(&ExamSchedule{}).Create(&exam1)
-	exam2 := ExamSchedule{
-		Semester: Semester2,
-		AcamedicYear: 2564,
-		ExamType: type2,
-		Course: course2,
-		RoomExam: "B1125",
-	}
-	db.Model(&ExamSchedule{}).Create(&exam2)
-	exam3 := ExamSchedule{
-		Semester: Semester3,
-		AcamedicYear: 2564,
-		ExamType: type2,
-		Course: course2,
-		RoomExam: "B1122",
-	}
-	db.Model(&ExamSchedule{}).Create(&exam3)
 }
