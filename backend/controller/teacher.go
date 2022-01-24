@@ -11,8 +11,7 @@ import (
 // List all teachers
 func ListTeacher(c *gin.Context) {
 	var teachers []entity.Teacher
-	id := c.Param("id")
-	if err := entity.DB().Raw("SELECT * FROM teachers where id = ? ", id).Scan(&teachers).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM teachers").Scan(&teachers).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
