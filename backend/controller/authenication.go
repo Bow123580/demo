@@ -64,7 +64,6 @@ func LoginStudent(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
 }
 
-
 // POST /login
 func LoginRegistrar(c *gin.Context) {
 	var payload LoginPayload
