@@ -30,6 +30,8 @@ func SetupDatabase() {
 		&AddCourse{},
 		&Registrar{},
 		&Program{},
+		&RequestStatus{},
+		&Petition{},
 	)
 
 	db = database
@@ -245,15 +247,37 @@ func SetupDatabase() {
 	db.Model(&AddCourse{}).Create(&addcourse1)
 
 	db.Model(&Withdrawal{}).Create(&Withdrawal{
-		Student:      student1,
-		Course:      course1,
-		Teacher:   teacher1,
-		Semester:    Semester1,
-		YearTime:     2022,
-		RemainCredit: 20,
-		Reason: "ttt",
+		Student:        student1,
+		Course:         course1,
+		Teacher:        teacher1,
+		Semester:       Semester1,
+		YearTime:       2022,
+		RemainCredit:   20,
+		Reason:         "ttt",
 		WithdrawalTime: time.Now(),
 	})
+
+	status1 := RequestStatus{
+		Status: "รอดำเนินการ",
+	}
+	db.Model(&RequestStatus{}).Create(&status1)
+	status2 := RequestStatus{
+		Status: "กำลังดำเนินการ",
+	}
+	db.Model(&RequestStatus{}).Create(&status2)
+	status3 := RequestStatus{
+		Status: "ดำเนินการสำเร็จแล้ว",
+	}
+	db.Model(&RequestStatus{}).Create(&status3)
+	//
+	claim1 := Petition{
+		Claim: "เกินกว่าหน่วยกิตกำหนด",
+	}
+	db.Model(&Petition{}).Create(&claim1)
+	claim2 := Petition{
+		Claim: "ต่ำกว่าหน่วยกิตกำหนด",
+	}
+	db.Model(&Petition{}).Create(&claim2)
 
 	// exam1 := ExamSchedule{
 	// 	AcamedicYear: 2564,
