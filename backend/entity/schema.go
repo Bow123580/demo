@@ -1,16 +1,17 @@
 package entity
- 
+
 import (
-  "time"
-  "gorm.io/gorm"
+	"time"
+
+	"gorm.io/gorm"
 )
 
-type Registrar struct{
+type Registrar struct {
 	gorm.Model
 	ID_registrar string `gorm:"uniqueIndex"`
-	Name        string
-	Email       string `gorm:"uniqueIndex"`
-	Password    string
+	Name         string
+	Email        string `gorm:"uniqueIndex"`
+	Password     string
 }
 
 type Student struct {
@@ -19,33 +20,37 @@ type Student struct {
 	Prefix     string
 	Name       string
 	Major      string
-	Email      string  `gorm:"uniqueIndex"`
 	Year       uint
+	Email      string
 	Password   string
+
+	Withdrawals []Withdrawal `gorm:"foreignKey:StudentID"`
 }
 
 type Teacher struct {
 	gorm.Model
 	ID_teacher string `gorm:"uniqueIndex"`
-	Name        string
-	Email       string //`gorm:"uniqueIndex"`
-	Password    string
-	Prefix      string
-	Major       string
+	Prefix     string
+	Name       string
+	Major      string
+	Email      string
+	Password   string
 
 	AddCourses  []AddCourse  `gorm:"foreignKey:TeacherID"`
+	Withdrawals []Withdrawal `gorm:"foreignKey:TeacherID"`
 }
 
-type Course struct{
+type Course struct {
 	gorm.Model
-	Coursename string
+	Coursename   string
 	Coursenumber int32
 
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
-	AddCourse []AddCourse `gorm:"foreignKey:CourseID"`
+	AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
+	Withdrawals  []Withdrawal   `gorm:"foreignKey:CourseID"`
 }
 
-type Program struct{
+type Program struct {
 	gorm.Model
 	Programname string
 
@@ -54,34 +59,35 @@ type Program struct{
 
 type Semester struct {
 	gorm.Model
-	Semester  string
+	Semester string
 
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:SemesterID"`
+	Withdrawals  []Withdrawal   `gorm:"foreignKey:SemesterID"`
 }
 
 type ExamType struct {
 	gorm.Model
-	Type  string
+	Type string
 
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:ExamTypeID"`
 }
 
-type RequestStatus struct{
+type RequestStatus struct {
 	gorm.Model
 	Status string
 }
 
-type Petition struct{
+type Petition struct {
 	gorm.Model
 	Claim string
 }
 
-type AddCourse struct{
+type AddCourse struct {
 	gorm.Model
-	Credit int16
-	DayTime string
+	Credit   int16
+	DayTime  string
 	SaveTime time.Time
-	
+
 	CourseID *uint
 	Course   Course `gorm:"references:id"`
 
@@ -90,16 +96,15 @@ type AddCourse struct{
 
 	TeacherID *uint
 	Teacher   Teacher `gorm:"references:id"`
-
 }
 
 type ExamSchedule struct {
 	gorm.Model
 	AcamedicYear int16
 	RoomExam     string
-	DateExam	 time.Time
-	StartTime 	 time.Time
-	EndTime		 time.Time
+	DateExam     time.Time
+	StartTime    time.Time
+	EndTime      time.Time
 
 	CourseID *uint
 	Course   Course `gorm:"references:id"`
@@ -110,6 +115,7 @@ type ExamSchedule struct {
 	SemesterID *uint
 	Semester   Semester `gorm:"references:id"`
 }
+
 type Withdrawal struct {
 	gorm.Model
 
