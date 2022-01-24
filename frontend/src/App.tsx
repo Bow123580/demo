@@ -120,7 +120,7 @@ export default function MiniDrawer() {
   const menu = [
     { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
     { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon/>, path: "/examschedule/create" },
-    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon/>, path: "/registrars" },
+    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon/>, path: "/" },
   ];
 
   useEffect(() => {
