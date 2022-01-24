@@ -20,8 +20,6 @@ func ListRegistrar(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": registrars})
 }
 
-<<<<<<< HEAD
-=======
 func ListRegistrars(c *gin.Context) {
 	var registrars []entity.Registrar
 	if err := entity.DB().Raw("SELECT * FROM registrars ").Scan(&registrars).Error; err != nil {
@@ -32,7 +30,6 @@ func ListRegistrars(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": registrars})
 }
 
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 // GET /registrar/:id
 // Get registrar by id
 func GetRegistrar(c *gin.Context) {

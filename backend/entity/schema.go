@@ -6,8 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-<<<<<<< HEAD
-=======
 type Registrar struct {
 	gorm.Model
 	ID_registrar string `gorm:"uniqueIndex"`
@@ -16,7 +14,6 @@ type Registrar struct {
 	Password     string
 }
 
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 type Student struct {
 	gorm.Model
 	ID_student string `gorm:"uniqueIndex"`
