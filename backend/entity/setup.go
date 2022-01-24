@@ -222,35 +222,7 @@ func SetupDatabase() {
 	}
 	db.Model(&Semester{}).Create(&Semester3)
 
-<<<<<<< HEAD
 	//ExamType Data
-=======
-	/*
-	status1 := RequestStatus{
-		Status: "รอดำเนินการ",
-	}
-	db.Model(&RequestStatus{}).Create(&status1)
-	status2 := RequestStatus{
-		Status: "กำลังดำเนินการ",
-	}
-	db.Model(&RequestStatus{}).Create(&status2)
-	status3 := RequestStatus{
-		Status: "ดำเนินการสำเร็จแล้ว",
-	}
-	db.Model(&RequestStatus{}).Create(&status3)
-
-	//
-	claim1 := Petition{
-		Claim: "เกินกว่าหน่วยกิตกำหนด",
-	}
-	db.Model(&Petition{}).Create(&claim1)
-	claim2 := Petition{
-		Claim: "ต่ำกว่าหน่วยกิตกำหนด",
-	}
-	db.Model(&Petition{}).Create(&claim2)	*/
-
-	// ExamType Data
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 	type1 := ExamType{
 		Type: "กลางภาค",
 	}
@@ -271,7 +243,6 @@ func SetupDatabase() {
 		SaveTime: time.Now(),
 	}
 	db.Model(&AddCourse{}).Create(&addcourse1)
-<<<<<<< HEAD
 
 	db.Model(&Withdrawal{}).Create(&Withdrawal{
 		Student:      student1,
@@ -317,24 +288,3 @@ func SetupDatabase() {
 	// }
 	// db.Model(&ExamSchedule{}).Create(&exam3)
 }
-=======
-	addcourse2 := AddCourse{
-		Course: course3,
-		Program: program1,
-		Teacher: teacher3,
-		Credit: 4,
-		DayTime: "THU 10:00-12:00",
-		SaveTime: time.Now(),
-	}
-	db.Model(&AddCourse{}).Create(&addcourse2)
-	addcourse3 := AddCourse{
-		Course: course2,
-		Program: program1,
-		Teacher: teacher4,
-		Credit: 4,
-		DayTime: "FRI 13:00-16:00",
-		SaveTime: time.Now(),
-	}
-	db.Model(&AddCourse{}).Create(&addcourse3)
-}
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
