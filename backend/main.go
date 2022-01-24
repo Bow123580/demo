@@ -148,7 +148,7 @@ func main() {
 	// Run the server
 	r.Run()
 }
-
+ 
 func CORSMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
