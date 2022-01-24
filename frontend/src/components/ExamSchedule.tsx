@@ -13,22 +13,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { ExamScheduleInterface } from "../models/IExamSchedule";
-<<<<<<< HEAD
-
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDateTimePicker,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
-import { TextField } from "@material-ui/core";
-/*import { ExamSchedule } from "@material-ui/icons";
-
-const Alert = (props: AlertProps) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
-=======
 import { format } from 'date-fns'
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -148,9 +133,4 @@ function ExamSchedules() {
   );
 }
 
-<<<<<<< HEAD
 export default ExamScheduleCreate;
-*/
-=======
-export default ExamSchedules;
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
