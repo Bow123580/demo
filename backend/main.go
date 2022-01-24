@@ -52,6 +52,13 @@ func main() {
 			protected.PATCH("/examtypes", controller.UpdateExamType)
 			protected.DELETE("/examtypes/:id", controller.DeleteExamType)
 
+			// ExamSchedule Routes
+			protected.GET("/examschedules", controller.ListExamSchedules)
+			protected.GET("/examschedule/:id", controller.GetExamSchedule)
+			protected.POST("/examschedules", controller.CreateExamSchedule)
+			protected.PATCH("/examschedules", controller.UpdateExamSchedule)
+			protected.DELETE("/examschedules/:id", controller.DeleteExamSchedule)
+
 			// Course Routes
 			protected.GET("/courses", controller.ListCourses)
 			protected.GET("/course/:id", controller.GetCourse)

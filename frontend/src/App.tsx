@@ -123,8 +123,7 @@ export default function MiniDrawer() {
   const menu = [
     { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
     { name: "นักศึกษา", icon: <AccountCircleIcon />, path: "/students" },
-    { name: "นายทะเบียน", icon: <AccountCircleIcon />, path: "/registrars" },
-    { name: "นายทะเบียน", icon: <AccountCircleIcon />, path: "/withdrawal" },
+    { name: "ขอถอนรายวิชา", icon: <AccountCircleIcon />, path: "/withdrawal" },
     { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule/create" },
     { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/" },
   ];
