@@ -6,14 +6,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type Registrar struct {
-	gorm.Model
-	ID_registrar string `gorm:"uniqueIndex"`
-	Name         string
-	Email        string `gorm:"uniqueIndex"`
-	Password     string
-}
-
 type Student struct {
 	gorm.Model
 	ID_student string `gorm:"uniqueIndex"`
@@ -36,7 +28,6 @@ type Teacher struct {
 	Email      string
 	Password   string
 
-<<<<<<< HEAD
 	AddCourse   []AddCourse  `gorm:"foreignKey:TeacherID"`
 	Withdrawals []Withdrawal `gorm:"foreignKey:TeacherID"`
 }
@@ -48,33 +39,25 @@ type Registrar struct {
 	Name         string
 	Email        string
 	Password     string
-}
 
-=======
 	AddCourses  []AddCourse  `gorm:"foreignKey:TeacherID"`
 	Withdrawals []Withdrawal `gorm:"foreignKey:TeacherID"`
 }
 
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 type Course struct {
 	gorm.Model
 	Coursename   string
 	Coursenumber int32
 
-<<<<<<< HEAD
-	Withdrawals  []Withdrawal   `gorm:"foreignKey:CourseID"`
-	ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
-	AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
-=======
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
 	AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
 	Withdrawals  []Withdrawal   `gorm:"foreignKey:CourseID"`
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 }
 
 type Program struct {
 	gorm.Model
 	Programname string
+
 	AddCourse   []AddCourse `gorm:"foreignKey:ProgramID"`
 }
 
@@ -82,25 +65,14 @@ type Semester struct {
 	gorm.Model
 	Semester string
 
-<<<<<<< HEAD
 	Withdrawals  []Withdrawal   `gorm:"foreignKey:SemesterID"`
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:SemesterID"`
-=======
-	ExamSchedule []ExamSchedule `gorm:"foreignKey:SemesterID"`
-	Withdrawals  []Withdrawal   `gorm:"foreignKey:SemesterID"`
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 }
 
 type ExamType struct {
 	gorm.Model
-<<<<<<< HEAD
+
 	Type         string
-	ExamSchedule []ExamSchedule `gorm:"foreignKey:ExamTypeID"`
-}
-
-=======
-	Type string
-
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:ExamTypeID"`
 }
 
@@ -114,7 +86,6 @@ type Petition struct {
 	Claim string
 }
 
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 type AddCourse struct {
 	gorm.Model
 	Credit   int16
