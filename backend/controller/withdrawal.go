@@ -21,7 +21,7 @@ func CreateWithdrawal(c *gin.Context) {
 		return
 	}
 
-	// 9: ค้นหา user ด้วย id
+	// 9: ค้นหา student ด้วย id
 	if tx := entity.DB().Where("id = ?", withdrawals.StudentID).First(&students); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "student not found"})
 		return
@@ -50,7 +50,7 @@ func CreateWithdrawal(c *gin.Context) {
 		Course:         courses,                    // โยงความสัมพันธ์กับ Entity Course
 		Teacher:        teachers,                   // โยงความสัมพันธ์กับ Entity Teacher
 		Semester:       semesters,                  // โยงความสัมพันธ์กับ Entity Semester
-		YearTime:       withdrawals.YearTime,       //ตั้งค่าฟิลด์ YearTime
+		YearTime:       withdrawals.YearTime,       // ตั้งค่าฟิลด์ YearTime
 		RemainCredit:   withdrawals.RemainCredit,   // ตั้งค่าฟิลด์ RemainCredit
 		Reason:         withdrawals.Reason,         // ตั้งค่าฟิลด์ Reason
 		WithdrawalTime: withdrawals.WithdrawalTime, // ตั้งค่าฟิลด์ WihdrawalTime
@@ -64,21 +64,21 @@ func CreateWithdrawal(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": wd})
 }
 
-// GET /returnod/:id
+// GET /withdrawals/:id
 func GetWithdrwal(c *gin.Context) {
 	var withdrawals entity.Withdrawal
 	id := c.Param("id")
-	if err := entity.DB().Preload("Student").Preload("Cousre").Preload("Teacher").Preload("Semester").Raw("SELECT * FROM withdrawals WHERE id = ?", id).Find(&withdrawals).Error; err != nil {
+	if err := entity.DB().Preload("Student").Preload("Course").Preload("Teacher").Preload("Semester").Raw("SELECT * FROM withdrawals WHERE student_id = ? ", id).Find(&withdrawals).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, gin.H{"data": withdrawals})
 }
 
-// GET /return_ods
+// GET /withdrawals
 func ListWithdrawals(c *gin.Context) {
 	var withdrawals []entity.Withdrawal
-	if err := entity.DB().Preload("Student").Preload("Cousre").Preload("Teacher").Preload("Semester").Raw("SELECT * FROM withdrawals ").Find(&withdrawals).Error; err != nil {
+	if err := entity.DB().Preload("Student").Preload("Course").Preload("Teacher").Preload("Semester").Raw("SELECT * FROM withdrawals ").Find(&withdrawals).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -86,11 +86,11 @@ func ListWithdrawals(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": withdrawals})
 }
 
-// GET /return_ods
+// GET /withdrawals
 func ListWithdrawal(c *gin.Context) {
 	var withdrawals []entity.Withdrawal
 	id := c.Param("id")
-	if err := entity.DB().Preload("Student").Preload("Cousre").Preload("Semester").Raw("SELECT * FROM withdrawals where student_id = ? ", id).Find(&withdrawals).Error; err != nil {
+	if err := entity.DB().Preload("Student").Preload("Course").Preload("Teacher").Preload("Semester").Raw("SELECT * FROM withdrawals where student_id = ? ", id).Find(&withdrawals).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

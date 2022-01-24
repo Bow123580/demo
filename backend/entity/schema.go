@@ -46,9 +46,9 @@ type Course struct {
 	Coursename   string
 	Coursenumber int32
 
+	Withdrawals  []Withdrawal   `gorm:"foreignKey:CourseID"`
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
 	AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
-	Withdrawals  []Withdrawal   `gorm:"foreignKey:CourseID"`
 }
 
 type Program struct {
@@ -59,7 +59,9 @@ type Program struct {
 
 type Semester struct {
 	gorm.Model
-	Semester     string
+	Semester string
+
+	Withdrawals  []Withdrawal   `gorm:"foreignKey:SemesterID"`
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:SemesterID"`
 }
 
@@ -67,7 +69,6 @@ type ExamType struct {
 	gorm.Model
 	Type         string
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:ExamTypeID"`
-	Withdrawals  []Withdrawal   `gorm:"foreignKey:SemesterID"`
 }
 
 type AddCourse struct {

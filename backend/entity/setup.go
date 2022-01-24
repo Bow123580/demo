@@ -244,6 +244,17 @@ func SetupDatabase() {
 	}
 	db.Model(&AddCourse{}).Create(&addcourse1)
 
+	db.Model(&Withdrawal{}).Create(&Withdrawal{
+		Student:      student1,
+		Course:      course1,
+		Teacher:   teacher1,
+		Semester:    Semester1,
+		YearTime:     2022,
+		RemainCredit: 20,
+		Reason: "ttt",
+		WithdrawalTime: time.Now(),
+	})
+
 	// exam1 := ExamSchedule{
 	// 	AcamedicYear: 2564,
 	// 	ExamType: type2,
