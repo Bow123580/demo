@@ -24,7 +24,6 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import Home from "./components/Home";
 import SignIn from "./components/Signin";
 import Students from "./components/Student";
-import { StudentsInterface } from "./models/IStudent";
 import Registrars from "./components/Registrar";
 import Withdrawals from "./components/Withdrawal";
 import WithdrawalCreate from "./components/WithdrawalCreate";
@@ -111,7 +110,6 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
-  const [students, setStudents] = useState<Partial<StudentsInterface>>({});
   const [open, setOpen] = React.useState(false);
   const [token, setToken] = React.useState<String>("");
   const handleDrawerOpen = () => {
@@ -127,8 +125,8 @@ export default function MiniDrawer() {
     { name: "นักศึกษา", icon: <AccountCircleIcon />, path: "/students" },
     { name: "นายทะเบียน", icon: <AccountCircleIcon />, path: "/registrars" },
     { name: "นายทะเบียน", icon: <AccountCircleIcon />, path: "/withdrawal" },
-    { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon/>, path: "/examschedule/create" },
-    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon/>, path: "/" },
+    { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule/create" },
+    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/" },
   ];
 
   useEffect(() => {

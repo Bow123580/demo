@@ -133,4 +133,4 @@ function ExamSchedules() {
   );
 }
 
-export default ExamScheduleCreate;
+export default ExamSchedules;

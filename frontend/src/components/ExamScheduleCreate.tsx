@@ -64,7 +64,6 @@ function ExamScheduleCreate(this: any) {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
-
   const apiUrl = "http://localhost:8080";
   const requestOptions = {
     method: "GET",
