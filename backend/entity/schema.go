@@ -75,12 +75,7 @@ type Course struct {
 type Program struct {
 	gorm.Model
 	Programname string
-<<<<<<< HEAD
 	AddCourse   []AddCourse `gorm:"foreignKey:ProgramID"`
-=======
-
-	AddCourse []AddCourse `gorm:"foreignKey:ProgramID"`
->>>>>>> e159a46eb8d75ab8b1e71a0d432a911c4948f880
 }
 
 type Semester struct {
