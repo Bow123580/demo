@@ -64,15 +64,6 @@ func LoginStudent(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
 }
 
-// LoginRegistrarResponse token response
-type RegistrarResponse struct {
-	ID           uint
-	ID_registrar string
-	Prefix       string
-	Name         string
-	Email        string
-	Password     string
-}
 
 // POST /login
 func LoginRegistrar(c *gin.Context) {
