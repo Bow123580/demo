@@ -58,7 +58,7 @@ type Program struct {
 	gorm.Model
 	Programname string
 
-	AddCourse   []AddCourse `gorm:"foreignKey:ProgramID"`
+	AddCourse []AddCourse `gorm:"foreignKey:ProgramID"`
 }
 
 type Semester struct {
@@ -124,19 +124,19 @@ type Withdrawal struct {
 	gorm.Model
 
 	StudentID *uint
-	Student   Student `gorm:"references:id"`
+	Student   Student `gorm:"references:id" valid:"-"`
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id" valid:"-"`
 
 	TeacherID *uint
-	Teacher   Teacher `gorm:"references:id"`
+	Teacher   Teacher `gorm:"references:id" valid:"-"`
 
 	SemesterID *uint
-	Semester   Semester `gorm:"references:id"`
+	Semester   Semester `gorm:"references:id" valid:"-"`
 
 	YearTime       int
-	RemainCredit   int
-	Reason         string
+	RemainCredit   int    `valid:"int~RemainCredit must be int"`
+	Reason         string `valid:"required~Reason cannot be blank"`
 	WithdrawalTime time.Time
 }

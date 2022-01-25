@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/PhatSut/demo/entity"
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 )
 
@@ -54,6 +55,12 @@ func CreateWithdrawal(c *gin.Context) {
 		RemainCredit:   withdrawals.RemainCredit,   // ตั้งค่าฟิลด์ RemainCredit
 		Reason:         withdrawals.Reason,         // ตั้งค่าฟิลด์ Reason
 		WithdrawalTime: withdrawals.WithdrawalTime, // ตั้งค่าฟิลด์ WihdrawalTime
+	}
+
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(withdrawals); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
 	}
 
 	// 13: บันทึก
