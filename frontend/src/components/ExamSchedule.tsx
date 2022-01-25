@@ -116,7 +116,7 @@ function ExamSchedules() {
               {ExamSchedule.map((item: ExamScheduleInterface) => (
                 <TableRow key={item.ID}>
                   <TableCell align="center">{item.Semester.Semester}</TableCell>
-                  <TableCell align="center">{item.AcamedicYear}</TableCell>
+                  <TableCell align="center">{item.AcademicYear}</TableCell>
                   <TableCell align="center">{item.ExamType.Type}</TableCell>
                   <TableCell align="center">{item.Course.Coursename}</TableCell>
                   <TableCell align="center">{item.RoomExam}</TableCell>

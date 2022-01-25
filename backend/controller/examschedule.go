@@ -5,6 +5,7 @@ import (
 
 	"github.com/PhatSut/demo/entity"
 	"github.com/gin-gonic/gin"
+	"github.com/asaskevich/govalidator"
 )
 
 // POST /ExamSchedules
@@ -42,7 +43,7 @@ func CreateExamSchedule(c *gin.Context) {
 	// 12: สร้าง ExamSchedule
 	pm := entity.ExamSchedule{
 		Semester: Semester,       // โยงความสัมพันธ์กับ Entity Semester
-		AcamedicYear: ExamSchedule.AcamedicYear,
+		AcademicYear: ExamSchedule.AcademicYear,
 		ExamType:  ExamType,        // โยงความสัมพันธ์กับ Entity ExamType
 		Course:         Course,               // โยงความสัมพันธ์กับ Entity Course
 		RoomExam: ExamSchedule.RoomExam,
@@ -50,6 +51,13 @@ func CreateExamSchedule(c *gin.Context) {
 		StartTime: ExamSchedule.StartTime,
 		EndTime: ExamSchedule.EndTime,
 	}
+
+	// แทรกการ validate ไว้ช่วงนี้ของ controller
+	if _, err := govalidator.ValidateStruct(ExamSchedule); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
 
 	// 13: บันทึก
 	if err := entity.DB().Create(&pm).Error; err != nil {
