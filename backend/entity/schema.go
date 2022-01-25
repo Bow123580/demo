@@ -136,7 +136,7 @@ type Withdrawal struct {
 	Semester   Semester `gorm:"references:id" valid:"-"`
 
 	YearTime       int
-	RemainCredit   int    `valid:"int~RemainCredit must be int"`
-	Reason         string `valid:"required~Reason cannot be blank"`
+	RemainCredit   int    // `valid:"int~RemainCredit must be int"`
+	Reason         string //`valid:"required~Reason cannot be blank"`
 	WithdrawalTime time.Time
 }
