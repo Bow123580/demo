@@ -280,7 +280,7 @@ func SetupDatabase() {
 	db.Model(&Petition{}).Create(&claim2)
 
 	// exam1 := ExamSchedule{
-	// 	AcamedicYear: 2564,
+	// 	AcademicYear: 2564,
 	// 	ExamType: type2,
 	// 	Course: course2,
 	// 	RoomExam: "B5204",
@@ -291,7 +291,7 @@ func SetupDatabase() {
 	// db.Model(&ExamSchedule{}).Create(&exam1)
 
 	// exam2 := ExamSchedule{
-	// 	AcamedicYear: 2564,
+	// 	AcademicYear: 2564,
 	// 	ExamType: type2,
 	// 	Course: course2,
 	// 	RoomExam: "B1125",
@@ -302,7 +302,7 @@ func SetupDatabase() {
 	// db.Model(&ExamSchedule{}).Create(&exam2)
 
 	// exam3 := ExamSchedule{
-	// 	AcamedicYear: 2564,
+	// 	AcademicYear: 2564,
 	// 	ExamType: type2,
 	// 	Course: course2,
 	// 	RoomExam: "B1122",

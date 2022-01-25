@@ -104,7 +104,7 @@ type AddCourse struct {
 
 type ExamSchedule struct {
 	gorm.Model
-	AcamedicYear int16
+	AcademicYear int16
 	RoomExam     string
 	DateExam     time.Time
 	StartTime    time.Time
