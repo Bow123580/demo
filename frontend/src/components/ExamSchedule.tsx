@@ -59,9 +59,9 @@ function ExamSchedules() {
 
   return (
     <div>
-      <Container className={classes.container} maxWidth="md">
+      <Container className={classes.container} maxWidth="lg">
         <Box display="flex">
-          <Box flexGrow={2}>
+          <Box flexGrow={1}>
             <Typography
               component="h2"
               variant="h6"
@@ -86,28 +86,28 @@ function ExamSchedules() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="5%">
                   ภาคการศึกษา
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="5%">
                   ปีการศึกษา
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="5%">
                   ประเภทการจัดสอบ
                 </TableCell>
-                <TableCell align="center" width="20%">
+                <TableCell align="center" width="5%">
                   ชื่อรายวิชา
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="5%">
                   ห้องสอบ
                 </TableCell>
-                <TableCell align="center" width="15%">
+                <TableCell align="center" width="5%">
                   วันที่สอบ
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="5%">
                   เวลาเริ่มต้น
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="5%">
                   เวลาสิ้นสุด
                 </TableCell>
               </TableRow>
@@ -116,7 +116,7 @@ function ExamSchedules() {
               {ExamSchedule.map((item: ExamScheduleInterface) => (
                 <TableRow key={item.ID}>
                   <TableCell align="center">{item.Semester.Semester}</TableCell>
-                  <TableCell align="center">{item.AcamedicYear}</TableCell>
+                  <TableCell align="center">{item.AcademicYear}</TableCell>
                   <TableCell align="center">{item.ExamType.Type}</TableCell>
                   <TableCell align="center">{item.Course.Coursename}</TableCell>
                   <TableCell align="center">{item.RoomExam}</TableCell>

@@ -93,31 +93,31 @@ type AddCourse struct {
 	SaveTime time.Time
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id"` 
 
 	ProgramID *uint
-	Program   Program `gorm:"references:id"`
+	Program   Program `gorm:"references:id"` 
 
 	TeacherID *uint
-	Teacher   Teacher `gorm:"references:id"`
+	Teacher   Teacher `gorm:"references:id"` 
 }
 
 type ExamSchedule struct {
 	gorm.Model
-	AcamedicYear int16
-	RoomExam     string
+	AcademicYear int16
+	RoomExam     string `valid:"matches(^[B]\\d{4}$)"`
 	DateExam     time.Time
 	StartTime    time.Time
 	EndTime      time.Time
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id" valid:"-"` 
 
 	ExamTypeID *uint
-	ExamType   ExamType `gorm:"references:id"`
+	ExamType   ExamType `gorm:"references:id" valid:"-"` 
 
 	SemesterID *uint
-	Semester   Semester `gorm:"references:id"`
+	Semester   Semester `gorm:"references:id" valid:"-"` 
 }
 
 type Withdrawal struct {

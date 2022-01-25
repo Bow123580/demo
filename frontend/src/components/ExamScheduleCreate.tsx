@@ -158,7 +158,7 @@ function ExamScheduleCreate(this: any) {
   function submit() {
     let data = {
       SemesterID: convertType(ExamSchedule.SemesterID),
-      AcamedicYear: convertType(ExamSchedule.AcamedicYear),
+      AcademicYear: convertType(ExamSchedule.AcademicYear),
       ExamTypeID: convertType(ExamSchedule.ExamTypeID),
       CourseID: convertType(ExamSchedule.CourseID),
       RoomExam: ExamSchedule.RoomExam ?? "",
@@ -242,12 +242,12 @@ function ExamScheduleCreate(this: any) {
             <p>ปีการศึกษา</p>
             <FormControl fullWidth variant="outlined">
               <TextField
-                id="AcamedicYear"
+                id="AcademicYear"
                 variant="outlined"
                 type="number"
                 size="medium"
                 placeholder="กรุณาปีการศึกษา"
-                value={ExamSchedule.AcamedicYear || ""}
+                value={ExamSchedule.AcademicYear || ""}
                 onChange={handleInputChange}
               />
             </FormControl>
