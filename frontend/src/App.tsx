@@ -34,7 +34,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ExamScheduleCreate from "./components/ExamScheduleCreate";
 import ExamSchedules from "./components/ExamSchedule";
 
-const drawerWidth = 240;
+const drawerWidth = 240; 
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -118,7 +118,7 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
+  }; 
 
   const menu = [
     { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
