@@ -26,7 +26,7 @@ function Home() {
         <h1 style={{ textAlign: "center" }}>ระบบลงทะเบียนเรียน</h1>
         <h3> </h3>
 
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <Button
             component={RouterLink}
             style={{ float: "left" }}
@@ -44,7 +44,7 @@ function Home() {
           >
             ฝ่ายทะเบียน
           </Button>
-        </Grid>
+        </Grid> */}
       </Container>
     </div >
   );
