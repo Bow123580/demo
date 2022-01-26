@@ -242,7 +242,7 @@ func SetupDatabase() {
 		Program:  program1,
 		Teacher:  teacher1,
 		Credit:   4,
-		DayTime:  "",
+		DayTime:  "TUE 18.00-21.00",
 		SaveTime: time.Now(),
 	}
 	db.Model(&AddCourse{}).Create(&addcourse1)

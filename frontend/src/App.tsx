@@ -122,7 +122,7 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
-  };
+  }; 
 
   const menu = [
     { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },

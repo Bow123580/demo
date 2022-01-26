@@ -7,7 +7,7 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 )
-
+ 
 func CreateWithdrawal(c *gin.Context) {
 
 	var withdrawals entity.Withdrawal
@@ -44,7 +44,7 @@ func CreateWithdrawal(c *gin.Context) {
 	if tx := entity.DB().Where("id = ?", withdrawals.SemesterID).First(&semesters); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "semester not found"})
 		return
-	}
+	} 
 	// 13: สร้าง Withdrawal
 	wd := entity.Withdrawal{
 		Student:        students,                   // โยงความสัมพันธ์กับ Entity Student
