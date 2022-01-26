@@ -36,6 +36,8 @@ import ExamSchedules from "./components/ExamSchedule";
 import SaveIcon from "@material-ui/icons/Save";
 import RequestExams from "./components/RequestExams";
 import RequestExamCreate from "./components/RequestExamCreate";
+import BookmarksIcon from '@material-ui/icons/Bookmarks';
+import RecordPetition from "./components/RecordPetition";
 
 
 const drawerWidth = 240; 
@@ -131,6 +133,8 @@ export default function MiniDrawer() {
     { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule/create" },
     { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/addcourse" },
     { name: "เพิ่มคำร้องขอสอบซ้ำซ้อน", icon: <SaveIcon />, path: "/request_exams" },
+    { name: "คำร้องขอลงทะเบียนเรียนเกินต่ำกว่าหน่วยกิตที่กำหนด", icon: <BookmarksIcon color="secondary" />, path: "/RecordPetition" },
+
   ];
 
   useEffect(() => {
@@ -235,6 +239,7 @@ export default function MiniDrawer() {
               <Route exact path="/examschedule/create" component={ExamScheduleCreate} />
               <Route exact path="/request_exams" component={RequestExams} />
               <Route exact path="/request_exam/create" component={RequestExamCreate}/>
+              <Route exact path="/RecordPetition" component={RecordPetition} />
             </Switch>
           </div>
         </main>
