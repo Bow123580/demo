@@ -16,8 +16,9 @@ type Student struct {
 	Email      string
 	Password   string
 
-	Withdrawals  []Withdrawal  `gorm:"foreignKey:StudentID"`
-	RequestExams []RequestExam `gorm:"foreignKey:StudentID"`
+	Withdrawals    []Withdrawal     `gorm:"foreignKey:StudentID"`
+	RequestExams   []RequestExam    `gorm:"foreignKey:StudentID"`
+	RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
 }
 
 type Teacher struct {
@@ -51,10 +52,11 @@ type Course struct {
 	Coursename   string
 	Coursenumber int32
 
-	ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
-	AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
-	Withdrawals  []Withdrawal   `gorm:"foreignKey:CourseID"`
-	RequestExams []RequestExam  `gorm:"foreignKey:CourseID"`
+	ExamSchedule   []ExamSchedule   `gorm:"foreignKey:CourseID"`
+	AddCourse      []AddCourse      `gorm:"foreignKey:CourseID"`
+	Withdrawals    []Withdrawal     `gorm:"foreignKey:CourseID"`
+	RequestExams   []RequestExam    `gorm:"foreignKey:CourseID"`
+	RecordPetition []RecordPetition `gorm:"foreignKey:CourseID"`
 }
 
 type Program struct {
@@ -88,7 +90,8 @@ type RequestStatus struct {
 
 type Petition struct {
 	gorm.Model
-	Claim string
+	Claim          string
+	RecordPetition []RecordPetition `gorm:"foreignKey:PetitionID"`
 }
 
 type AddCourse struct {
@@ -169,4 +172,21 @@ type RequestExam struct {
 	RequestStatus   RequestStatus `gorm:"references:id"`
 
 	RequestTime time.Time
+}
+
+type RecordPetition struct {
+	gorm.Model
+
+	Because          string
+	RegisteredCredit int
+	TimeRecord       time.Time
+
+	StudentID *uint
+	Student   Student `gorm:"references:id"`
+
+	PetitionID *uint
+	Petition   Petition `gorm:"references:id"`
+
+	CourseID *uint
+	Course   Course `gorm:"references:id"`
 }

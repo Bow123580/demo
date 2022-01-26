@@ -33,6 +33,7 @@ func SetupDatabase() {
 		&RequestStatus{},
 		&Petition{},
 		&RequestExam{},
+		&RecordPetition{},
 	)
 
 	db = database
