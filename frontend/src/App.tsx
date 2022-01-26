@@ -34,7 +34,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ExamScheduleCreate from "./components/ExamScheduleCreate";
 import ExamSchedules from "./components/ExamSchedule";
 
-const drawerWidth = 240;
+const drawerWidth = 240; 
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -125,7 +125,7 @@ export default function MiniDrawer() {
     { name: "นักศึกษา", icon: <AccountCircleIcon />, path: "/students" },
     { name: "ขอถอนรายวิชา", icon: <AccountCircleIcon />, path: "/withdrawal" },
     { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule/create" },
-    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/" },
+    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/addcourse" },
   ];
 
   useEffect(() => {
