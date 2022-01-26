@@ -7,7 +7,7 @@ import (
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 )
-
+ 
 func CreateWithdrawal(c *gin.Context) {
 
 	var withdrawals entity.Withdrawal
