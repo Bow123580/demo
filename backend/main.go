@@ -102,8 +102,6 @@ func main() {
 			protected.PATCH("/request_exams", controller.UpdateRequestExam)
 			protected.DELETE("/requestexams/:id", controller.DeleteRequestExam)
 
-			
-
 		}
 	}
 
