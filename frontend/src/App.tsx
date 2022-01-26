@@ -33,6 +33,10 @@ import EventNoteIcon from '@mui/icons-material/EventNote';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ExamScheduleCreate from "./components/ExamScheduleCreate";
 import ExamSchedules from "./components/ExamSchedule";
+import SaveIcon from "@material-ui/icons/Save";
+import RequestExams from "./components/RequestExams";
+import RequestExamCreate from "./components/RequestExamCreate";
+
 
 const drawerWidth = 240; 
 
@@ -126,6 +130,7 @@ export default function MiniDrawer() {
     { name: "ขอถอนรายวิชา", icon: <AccountCircleIcon />, path: "/withdrawal" },
     { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule/create" },
     { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/addcourse" },
+    { name: "เพิ่มคำร้องขอสอบซ้ำซ้อน", icon: <SaveIcon />, path: "/request_exams" },
   ];
 
   useEffect(() => {
@@ -228,6 +233,8 @@ export default function MiniDrawer() {
               <Route exact path="/addcourse/create" component={AddCourseCreate} />
               <Route exact path="/examschedule" component={ExamSchedules} />
               <Route exact path="/examschedule/create" component={ExamScheduleCreate} />
+              <Route exact path="/request_exams" component={RequestExams} />
+              <Route exact path="/request_exam/create" component={RequestExamCreate}/>
             </Switch>
           </div>
         </main>

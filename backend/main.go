@@ -88,6 +88,20 @@ func main() {
 			protected.PATCH("/withdrawals", controller.UpdateWithdrawal)
 			protected.DELETE("/withdrawals/:id", controller.DeleteWithdrawal)
 
+			// RequestStatus Routes
+			protected.GET("/requeststatuses", controller.ListRequestStatuses)
+			protected.GET("/requeststatus/:id", controller.GetRequestStatus)
+			protected.POST("/requeststatuses", controller.CreateRequestStatus)
+			protected.PATCH("/requeststatuses", controller.UpdateRequestStatus)
+			protected.DELETE("/requeststatuses/:id", controller.DeleteRequestStatus)
+
+			// RequestExam Routes
+			protected.GET("/request_exams", controller.ListRequestExams)
+			protected.GET("/requestexam/:id", controller.GetRequestExam)
+			protected.POST("/request_exams", controller.CreateRequestExam)
+			protected.PATCH("/request_exams", controller.UpdateRequestExam)
+			protected.DELETE("/requestexams/:id", controller.DeleteRequestExam)
+
 		}
 	}
 

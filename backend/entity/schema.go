@@ -16,7 +16,8 @@ type Student struct {
 	Email      string
 	Password   string
 
-	Withdrawals []Withdrawal `gorm:"foreignKey:StudentID"`
+	Withdrawals  []Withdrawal  `gorm:"foreignKey:StudentID"`
+	RequestExams []RequestExam `gorm:"foreignKey:StudentID"`
 }
 
 type Teacher struct {
@@ -28,8 +29,9 @@ type Teacher struct {
 	Email      string
 	Password   string
 
-	AddCourse   []AddCourse  `gorm:"foreignKey:TeacherID"`
-	Withdrawals []Withdrawal `gorm:"foreignKey:TeacherID"`
+	AddCourse    []AddCourse   `gorm:"foreignKey:TeacherID"`
+	Withdrawals  []Withdrawal  `gorm:"foreignKey:TeacherID"`
+	RequestExams []RequestExam `gorm:"foreignKey:TeacherID"`
 }
 
 type Registrar struct {
@@ -52,6 +54,7 @@ type Course struct {
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:CourseID"`
 	AddCourse    []AddCourse    `gorm:"foreignKey:CourseID"`
 	Withdrawals  []Withdrawal   `gorm:"foreignKey:CourseID"`
+	RequestExams []RequestExam  `gorm:"foreignKey:CourseID"`
 }
 
 type Program struct {
@@ -67,6 +70,7 @@ type Semester struct {
 
 	Withdrawals  []Withdrawal   `gorm:"foreignKey:SemesterID"`
 	ExamSchedule []ExamSchedule `gorm:"foreignKey:SemesterID"`
+	RequestExams []RequestExam  `gorm:"foreignKey:SemesterID"`
 }
 
 type ExamType struct {
@@ -78,7 +82,8 @@ type ExamType struct {
 
 type RequestStatus struct {
 	gorm.Model
-	Status string
+	Status       string
+	RequestExams []RequestExam `gorm:"foreignKey:RequestStatusID"`
 }
 
 type Petition struct {
@@ -139,4 +144,29 @@ type Withdrawal struct {
 	RemainCredit   int    // `valid:"int~RemainCredit must be int"`
 	Reason         string //`valid:"required~Reason cannot be blank"`
 	WithdrawalTime time.Time
+}
+
+type RequestExam struct {
+	gorm.Model
+
+	StudentID *uint
+	Student   Student `gorm:"references:id"`
+
+	SemesterID *uint
+	Semester   Semester `gorm:"references:id"`
+
+	AcademicYear int
+
+	CourseID *uint
+	Course   Course `gorm:"references:id"`
+
+	TeacherID *uint
+	Teacher   Teacher `gorm:"references:id"`
+
+	Tel string
+
+	RequestStatusID *uint
+	RequestStatus   RequestStatus `gorm:"references:id"`
+
+	RequestTime time.Time
 }

@@ -32,6 +32,7 @@ func SetupDatabase() {
 		&Program{},
 		&RequestStatus{},
 		&Petition{},
+		&RequestExam{},
 	)
 
 	db = database
