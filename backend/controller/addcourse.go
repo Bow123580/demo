@@ -43,6 +43,8 @@ func CreateAddCourse(c *gin.Context) {
 		Course:   Course,  // โยงความสัมพันธ์กับ Entity Course
 		Program:  Program, // โยงความสัมพันธ์กับ Entity Program
 		Teacher:  Teacher, // โยงความสัมพันธ์กับ Entity Teacher
+		Credit: AddCourse.Credit,
+		DayTime: AddCourse.DayTime,
 		SaveTime: AddCourse.SaveTime,
 	}
 
