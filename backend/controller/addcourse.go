@@ -25,7 +25,7 @@ func CreateAddCourse(c *gin.Context) {
 	if tx := entity.DB().Where("id = ?", AddCourse.CourseID).First(&Course); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
 		return
-	}
+	} 
 
 	// 10: ค้นหา Program ด้วย id
 	if tx := entity.DB().Where("id = ?", AddCourse.ProgramID).First(&Program); tx.RowsAffected == 0 {
