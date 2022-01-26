@@ -76,6 +76,15 @@ func SetupDatabase() {
 	}
 	db.Model(&Registrar{}).Create(&registrar4)
 
+	registrar5 := Registrar{
+		ID_registrar: "R5901258",
+		Prefix:       "Mr.",
+		Name:         "Jeeninee Khuptawuttinun",
+		Email:        "Jeeninee@gmail.com",
+		Password:     string(password),
+	}
+	db.Model(&Registrar{}).Create(&registrar5)
+
 	student1 := Student{
 		ID_student: "B6202385",
 		Prefix:     "Miss",
@@ -125,11 +134,22 @@ func SetupDatabase() {
 		Prefix:     "Mr.",
 		Name:       "Pawarit Praneetponkrang",
 		Major:      "CPE",
-		Year:       3,
+		Year:       6,
 		Email:      "pawarit@gmail.com",
 		Password:   string(password),
 	}
 	db.Model(&Student{}).Create(&student5)
+
+	student6 := Student{
+		ID_student: "B5901258",
+		Prefix:     "Miss",
+		Name:       "Khuptawuttinun",
+		Major:      "CPE",
+		Year:       6,
+		Email:      "Khuptawuttinun@gmail.com",
+		Password:   string(password),
+	}
+	db.Model(&Student{}).Create(&student6)
 
 	teacher1 := Teacher{
 		ID_teacher: "T000001",
@@ -140,6 +160,7 @@ func SetupDatabase() {
 		Major:      "CPE",
 	}
 	db.Model(&Teacher{}).Create(&teacher1)
+
 	teacher2 := Teacher{
 		ID_teacher: "T0023581",
 		Name:       "ผู้ช่วยศาสตราจารย์ ดร.นันทวุฒิ คะอังกุ",
@@ -149,6 +170,7 @@ func SetupDatabase() {
 		Major:      "CPE",
 	}
 	db.Model(&Teacher{}).Create(&teacher2)
+
 	teacher3 := Teacher{
 		ID_teacher: "T0157690",
 		Name:       "ผู้ช่วยศาสตราจารย์ ดร.ศรัญญา กาญจนวัฒนา",
@@ -158,6 +180,7 @@ func SetupDatabase() {
 		Major:      "CPE",
 	}
 	db.Model(&Teacher{}).Create(&teacher3)
+
 	teacher4 := Teacher{
 		ID_teacher: "T1578952",
 		Name:       "ผู้ช่วยศาสตราจารย์ ดร.ปรเมศวร์ ห่อแก้ว",
@@ -174,26 +197,31 @@ func SetupDatabase() {
 		Coursenumber: 523332,
 	}
 	db.Model(&Course{}).Create(&course1)
+
 	course2 := Course{
 		Coursename:   "COMPUTER AND COMMUNICATION",
 		Coursenumber: 523352,
 	}
 	db.Model(&Course{}).Create(&course2)
+
 	course3 := Course{
 		Coursename:   "OPERATING SYSTEMS",
 		Coursenumber: 523354,
 	}
 	db.Model(&Course{}).Create(&course3)
+
 	course4 := Course{
 		Coursename:   "System Analysis and Design",
 		Coursenumber: 523331,
 	}
 	db.Model(&Course{}).Create(&course4)
+
 	course5 := Course{
 		Coursename:   "DATABASE SYSTEMS",
 		Coursenumber: 523211,
 	}
 	db.Model(&Course{}).Create(&course5)
+
 	course6 := Course{
 		Coursename:   "COMPUTER STATISTICS",
 		Coursenumber: 523301,
