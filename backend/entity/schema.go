@@ -42,9 +42,6 @@ type Registrar struct {
 	Name         string
 	Email        string
 	Password     string
-
-	AddCourses  []AddCourse  `gorm:"foreignKey:TeacherID"`
-	Withdrawals []Withdrawal `gorm:"foreignKey:TeacherID"`
 }
 
 type Course struct {

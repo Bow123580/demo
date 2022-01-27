@@ -331,14 +331,4 @@ func SetupDatabase() {
 	// }
 	// db.Model(&ExamSchedule{}).Create(&exam2)
 
-	// exam3 := ExamSchedule{
-	// 	AcademicYear: 2564,
-	// 	ExamType: type2,
-	// 	Course: course2,
-	// 	RoomExam: "B1122",
-	// 	DateExam: 2021-05-03,
-	// 	StartTime: ,
-	// 	EndTime: ,
-	// }
-	// db.Model(&ExamSchedule{}).Create(&exam3)
 }
