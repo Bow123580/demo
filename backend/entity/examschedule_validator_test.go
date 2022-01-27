@@ -12,7 +12,7 @@ func TestExamSchdulePass(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	// ข้อมูลถูกต้องหมดทุก field
-	examschedule := ExamSchedule{
+	increasegrade := IncreaseGrades{
 		AcademicYear: 2564,
 		RoomExam: "B5204",
 		

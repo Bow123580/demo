@@ -6,6 +6,7 @@ export interface IncreaseGradesInterface {
   ID: number,
   Date: Date,
   Credit: number,
+  Description: string,
   StudentID: number,
   Student: StudentsInterface,
   GradesID: number,

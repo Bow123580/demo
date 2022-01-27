@@ -149,6 +149,7 @@ function IncreaseGradesCreate() {
             CourseID: convertType(increasegrades.CourseID),
             GradesID: convertType(increasegrades.GradesID),
             Credit: convertType(increasegrades.Credit),
+            Description: convertType(increasegrades.Description),
             Date: selectedDate || "",
         };
         console.log(data)
@@ -308,6 +309,24 @@ function IncreaseGradesCreate() {
                             <Typography
                                 color="textPrimary"
                             >
+                                หมายเหตุ
+                            </Typography>
+                            <TextField
+                                id="Description"
+                                variant="outlined"
+                                type="string"
+                                size="medium"
+                                value={increasegrades.Description || ""}
+                                onChange={handleInputChange}
+                            />
+                        </FormControl>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <FormControl fullWidth variant="outlined">
+                            <Typography
+                                color="textPrimary"
+                            >
                                 วันที่และเวลา
                             </Typography>
                             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -322,7 +341,6 @@ function IncreaseGradesCreate() {
                             </MuiPickersUtilsProvider>
                         </FormControl>
                     </Grid>
-
                     <Grid item xs={12}>
                         <Button
                             component={RouterLink}

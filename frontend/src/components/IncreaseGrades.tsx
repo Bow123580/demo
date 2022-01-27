@@ -101,6 +101,9 @@ function IncreaseGrades() {
                                     ผลการเรียน
                                 </TableCell>
                                 <TableCell align="center" width="5%">
+                                    หมายเหตุ
+                                </TableCell>
+                                <TableCell align="center" width="5%">
                                     วันที่และเวลา
                                 </TableCell>
                             </TableRow>
@@ -112,7 +115,9 @@ function IncreaseGrades() {
                                     <TableCell align="center">{item.Course.Coursename}</TableCell>
                                     <TableCell align="center">{item.Credit}</TableCell>
                                     <TableCell align="center">{item.Grades.Grade}</TableCell>
+                                    <TableCell align="center">{item.Description}</TableCell>
                                     <TableCell align="center">{format((new Date(item.Date)), 'dd MMMM yyyy hh:mm a')}</TableCell>
+                                    
                                 </TableRow>
                             ))}
                         </TableBody>
