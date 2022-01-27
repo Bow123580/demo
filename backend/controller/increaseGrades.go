@@ -45,6 +45,7 @@ func CreateIncreaseGrades(c *gin.Context) {
 		Student: Student, // โยงความสัมพันธ์กับ Entity ExamType
 		Date:    IncreaseGrades.Date,
 		Credit:  IncreaseGrades.Credit,
+		Description:  IncreaseGrades.Description,
 	}
 
 	// 13: บันทึก

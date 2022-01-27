@@ -149,6 +149,7 @@ function IncreaseGradesCreate() {
             CourseID: convertType(increasegrades.CourseID),
             GradesID: convertType(increasegrades.GradesID),
             Credit: convertType(increasegrades.Credit),
+            Description: increasegrades.Description ?? "",
             Date: selectedDate || "",
         };
         console.log(data)
@@ -300,6 +301,27 @@ function IncreaseGradesCreate() {
                                     </option>
                                 ))}
                             </Select>
+                        </FormControl>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <FormControl fullWidth variant="outlined">
+                            <Typography
+                                color="textPrimary"
+                            >
+                                เหตุผล
+                            </Typography>
+                            <option aria-label="None" value="">
+                                กรุณาใส่เหตุผล
+                            </option>
+                            <TextField
+                                id="Description"
+                                variant="outlined"
+                                type="string"
+                                size="medium"
+                                value={increasegrades.Description || ""}
+                                onChange={handleInputChange}
+                            />
                         </FormControl>
                     </Grid>
 

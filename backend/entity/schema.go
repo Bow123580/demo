@@ -203,6 +203,7 @@ type IncreaseGrades struct {
 	gorm.Model
 	Date   time.Time
 	Credit uint
+	Description string
 
 	StudentID *uint
 	Student   Student `gorm:"references:id"`
