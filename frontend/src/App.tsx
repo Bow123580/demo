@@ -38,6 +38,8 @@ import RequestExams from "./components/RequestExams";
 import RequestExamCreate from "./components/RequestExamCreate";
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import RecordPetition from "./components/RecordPetition";
+import IncreaseGrades from "./components/IncreaseGrades";
+import IncreaseGradesCreate from "./components/IncreaseGradesCreate";
 
 
 const drawerWidth = 240; 
@@ -127,13 +129,14 @@ export default function MiniDrawer() {
   }; 
 
   const menu = [
-    { name: "หน้าแรก", icon: <HomeIcon />, path: "/" },
-    { name: "นักศึกษา", icon: <AccountCircleIcon />, path: "/students" },
-    { name: "ขอถอนรายวิชา", icon: <AccountCircleIcon />, path: "/withdrawal" },
-    { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon />, path: "/examschedule/create" },
-    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon />, path: "/addcourse" },
-    { name: "เพิ่มคำร้องขอสอบซ้ำซ้อน", icon: <SaveIcon />, path: "/request_exams" },
+    { name: "หน้าแรก", icon: <HomeIcon color="secondary"/>, path: "/" },
+    { name: "นักศึกษา", icon: <AccountCircleIcon color="secondary"/>, path: "/students" },
+    { name: "ขอถอนรายวิชา", icon: <AccountCircleIcon color="secondary"/>, path: "/withdrawal" },
+    { name: "เพิ่มตารางสอบ", icon: <EventNoteIcon color="secondary" />, path: "/examschedule/create" },
+    { name: "เพิ่มรายวิชา", icon: <AutoStoriesIcon color="secondary" />, path: "/addcourse" },
+    { name: "เพิ่มคำร้องขอสอบซ้ำซ้อน", icon: <SaveIcon color="secondary"/>, path: "/request_exams" },
     { name: "คำร้องขอลงทะเบียนเรียนเกินต่ำกว่าหน่วยกิตที่กำหนด", icon: <BookmarksIcon color="secondary" />, path: "/RecordPetition" },
+    { name: "เพิ่มข้อมูลเกรดนักศึกษา", icon: <BookmarksIcon color="secondary" />, path: "/Increasegrade" },
 
   ];
 
@@ -240,6 +243,9 @@ export default function MiniDrawer() {
               <Route exact path="/request_exams" component={RequestExams} />
               <Route exact path="/request_exam/create" component={RequestExamCreate}/>
               <Route exact path="/RecordPetition" component={RecordPetition} />
+              <Route exact path="/Increasegrade" component={IncreaseGrades} />
+              <Route exact path="/Increasegrade/create" component={IncreaseGradesCreate} />
+
             </Switch>
           </div>
         </main>

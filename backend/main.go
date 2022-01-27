@@ -116,6 +116,20 @@ func main() {
 			protected.PATCH("/record_petitions", controller.UpdateRecordPetition)
 			protected.DELETE("/recordpetitions/:id", controller.DeleteRecordPetition)
 
+			// Grades Routes
+			protected.GET("/grades", controller.ListGrades)
+			protected.GET("/grades/:id", controller.GetGrades)
+			protected.POST("/grades", controller.CreateGrades)
+			protected.PATCH("/grades", controller.UpdateGrades)
+			protected.DELETE("/grades/:id", controller.DeleteGrades)
+
+			// IncreaseGrades Routes
+			protected.GET("/increasegrades", controller.ListIncreaseGrades)
+			protected.GET("/increasegrade/:id", controller.GetIncreaseGrades)
+			protected.POST("/increasegrades", controller.CreateIncreaseGrades)
+			protected.PATCH("/increasegrades", controller.UpdateIncreaseGrades)
+			protected.DELETE("/increasegrades/:id", controller.DeleteSemester)
+
 		}
 	}
 

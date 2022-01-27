@@ -19,6 +19,7 @@ type Student struct {
 	Withdrawals    []Withdrawal     `gorm:"foreignKey:StudentID"`
 	RequestExams   []RequestExam    `gorm:"foreignKey:StudentID"`
 	RecordPetition []RecordPetition `gorm:"foreignKey:StudentID"`
+	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:StudentID"`
 }
 
 type Teacher struct {
@@ -54,6 +55,7 @@ type Course struct {
 	Withdrawals    []Withdrawal     `gorm:"foreignKey:CourseID"`
 	RequestExams   []RequestExam    `gorm:"foreignKey:CourseID"`
 	RecordPetition []RecordPetition `gorm:"foreignKey:CourseID"`
+	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:CourseID"`
 }
 
 type Program struct {
@@ -85,9 +87,17 @@ type RequestStatus struct {
 	RequestExams []RequestExam `gorm:"foreignKey:RequestStatusID"`
 }
 
+type Grades struct {
+	gorm.Model
+	Grade string
+
+	IncreaseGrades []IncreaseGrades `gorm:"foreignKey:GradesID"`
+}
+
 type Petition struct {
 	gorm.Model
 	Claim          string
+
 	RecordPetition []RecordPetition `gorm:"foreignKey:PetitionID"`
 }
 
@@ -186,4 +196,21 @@ type RecordPetition struct {
 
 	CourseID *uint
 	Course   Course `gorm:"references:id"`
+}
+
+
+type IncreaseGrades struct {
+	gorm.Model
+	Date   time.Time
+	Credit uint
+
+	StudentID *uint
+	Student   Student `gorm:"references:id"`
+
+	GradesID *uint
+	Grades   Grades `gorm:"references:id"`
+
+	CourseID *uint
+	Course   Course `gorm:"references:id"`
+
 }

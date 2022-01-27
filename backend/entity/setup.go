@@ -19,6 +19,7 @@ func SetupDatabase() {
 	if err != nil {
 		panic("failed to connect database")
 	}
+	
 	database.AutoMigrate(
 		&Semester{},
 		&ExamType{},
@@ -34,6 +35,8 @@ func SetupDatabase() {
 		&Petition{},
 		&RequestExam{},
 		&RecordPetition{},
+		&Grades{},
+		&IncreaseGrades{},
 	)
 
 	db = database
@@ -291,15 +294,18 @@ func SetupDatabase() {
 		Status: "รอดำเนินการ",
 	}
 	db.Model(&RequestStatus{}).Create(&status1)
+
 	status2 := RequestStatus{
 		Status: "กำลังดำเนินการ",
 	}
 	db.Model(&RequestStatus{}).Create(&status2)
+
 	status3 := RequestStatus{
 		Status: "ดำเนินการสำเร็จแล้ว",
 	}
 	db.Model(&RequestStatus{}).Create(&status3)
-	//
+
+	// Claim data
 	claim1 := Petition{
 		Claim: "เกินกว่าหน่วยกิตกำหนด",
 	}
@@ -309,26 +315,38 @@ func SetupDatabase() {
 	}
 	db.Model(&Petition{}).Create(&claim2)
 
-	// exam1 := ExamSchedule{
-	// 	AcademicYear: 2564,
-	// 	ExamType: type2,
-	// 	Course: course2,
-	// 	RoomExam: "B5204",
-	// 	DateExam: 2021-10-02,
-	// 	StartTime: ,
-	// 	EndTime: ,
-	// }
-	// db.Model(&ExamSchedule{}).Create(&exam1)
-
-	// exam2 := ExamSchedule{
-	// 	AcademicYear: 2564,
-	// 	ExamType: type2,
-	// 	Course: course2,
-	// 	RoomExam: "B1125",
-	// 	DateExam: 2021-10-05,
-	// 	StartTime: ,
-	// 	EndTime: ,
-	// }
-	// db.Model(&ExamSchedule{}).Create(&exam2)
+	//Grades Data
+	grade1 := Grades{
+		Grade: "A",
+	}
+	db.Model(&Grades{}).Create(&grade1)
+	grade2 := Grades{
+		Grade: "B+",
+	}
+	db.Model(&Grades{}).Create(&grade2)
+	grade3 := Grades{
+		Grade: "B",
+	}
+	db.Model(&Grades{}).Create(&grade3)
+	grade4 := Grades{
+		Grade: "C+",
+	}
+	db.Model(&Grades{}).Create(&grade4)
+	grade5 := Grades{
+		Grade: "C",
+	}
+	db.Model(&Grades{}).Create(&grade5)
+	grade6 := Grades{
+		Grade: "D+",
+	}
+	db.Model(&Grades{}).Create(&grade6)
+	grade7 := Grades{
+		Grade: "D",
+	}
+	db.Model(&Grades{}).Create(&grade7)
+	grade8 := Grades{
+		Grade: "F",
+	}
+	db.Model(&Grades{}).Create(&grade8)
 
 }

@@ -216,7 +216,7 @@ function ExamScheduleCreate(this: any) {
         </Box>
         <Divider />
         <Grid container spacing={3} className={classes.root}>
-        <Grid item xs={6}>
+          <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
               <p>ภาคการศึกษา</p>
               <Select
@@ -325,7 +325,7 @@ function ExamScheduleCreate(this: any) {
             </FormControl>
           </Grid>
           <Grid item xs={6}>
-          <FormControl fullWidth variant="outlined">
+            <FormControl fullWidth variant="outlined">
               <p>เวลาเริ่มต้น</p>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardTimePicker
@@ -339,7 +339,7 @@ function ExamScheduleCreate(this: any) {
             </FormControl>
           </Grid>
           <Grid item xs={6}>
-          <FormControl fullWidth variant="outlined">
+            <FormControl fullWidth variant="outlined">
               <p>เวลาสิ้นสุด</p>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardTimePicker
