@@ -41,7 +41,7 @@ func CreateExamSchedule(c *gin.Context) {
 		return
 	}
 	// 12: สร้าง ExamSchedule
-	pm := entity.ExamSchedule{
+	es := entity.ExamSchedule{
 		Semester: Semester,       // โยงความสัมพันธ์กับ Entity Semester
 		AcademicYear: ExamSchedule.AcademicYear,
 		ExamType:  ExamType,        // โยงความสัมพันธ์กับ Entity ExamType
@@ -53,18 +53,18 @@ func CreateExamSchedule(c *gin.Context) {
 	}
 
 	// แทรกการ validate ไว้ช่วงนี้ของ controller
-	if _, err := govalidator.ValidateStruct(ExamSchedule); err != nil {
+	if _, err := govalidator.ValidateStruct(es); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 
 	// 13: บันทึก
-	if err := entity.DB().Create(&pm).Error; err != nil {
+	if err := entity.DB().Create(&es).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": pm})
+	c.JSON(http.StatusOK, gin.H{"data": es})
 }
 
 // GET /ExamSchedule/:id
