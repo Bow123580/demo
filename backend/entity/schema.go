@@ -119,20 +119,20 @@ type AddCourse struct {
 
 type ExamSchedule struct {
 	gorm.Model
-	AcademicYear int16
-	RoomExam     string
-	DateExam     time.Time
+	AcademicYear uint   `valid:"range(2500|2600)~AcademicYear must be 4 digits"`
+	RoomExam     string `valid:"matches(^[B]\\d{4}$)"`
+	ExamDate     time.Time
 	StartTime    time.Time
 	EndTime      time.Time
 
 	CourseID *uint
-	Course   Course `gorm:"references:id"`
+	Course   Course `gorm:"references:id" valid:"-"`
 
 	ExamTypeID *uint
-	ExamType   ExamType `gorm:"references:id"`
+	ExamType   ExamType `gorm:"references:id" valid:"-"`
 
 	SemesterID *uint
-	Semester   Semester `gorm:"references:id"`
+	Semester   Semester `gorm:"references:id" valid:"-"`
 }
 
 type Withdrawal struct {
