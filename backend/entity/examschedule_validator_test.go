@@ -28,7 +28,7 @@ func TestExamSchdulePass(t *testing.T) {
 }
 
 //ตรวจสอบปีการศึกษาต้องไม่เป็นตัวเลข 4 หลักต้องเจอ Error 
-func TestAcademicYearMustBeInValidPattern(t *testing.T) {
+func TestAcademicYearMustBeInRange(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	fixtures := []uint{
