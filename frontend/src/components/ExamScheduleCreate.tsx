@@ -63,6 +63,7 @@ function ExamScheduleCreate(this: any) {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const apiUrl = "http://localhost:8080";
   const requestOptions = {
@@ -185,6 +186,7 @@ function ExamScheduleCreate(this: any) {
           setSuccess(true);
         } else {
           setError(true);
+          setErrorMessage(res.error)
         }
       });
   }
@@ -198,7 +200,7 @@ function ExamScheduleCreate(this: any) {
       </Snackbar>
       <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
-          บันทึกตารางสอบไม่สำเร็จ
+          บันทึกตารางสอบไม่สำเร็จ: {errorMessage}
         </Alert>
       </Snackbar>
       <Paper className={classes.paper}>
