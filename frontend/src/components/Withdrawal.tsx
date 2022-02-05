@@ -15,6 +15,7 @@ import TableRow from "@material-ui/core/TableRow";
 import { WithdrawalsInterface } from "../models/IWithdrawal";
 import { format } from 'date-fns'
 
+import NavBar from "./NavBar";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -63,6 +64,7 @@ function Withdrawals() {
 
     return (
         <div>
+            <NavBar />
             <Container className={classes.container} maxWidth="lg">
                 <Box display="flex">
                     <Box flexGrow={1}>
