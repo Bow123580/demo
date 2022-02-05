@@ -26,7 +26,7 @@ import { TextField } from "@material-ui/core";
 import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 
-
+import NavBar from "./NavBar";
 
 
 const Alert = (props: AlertProps) => {
@@ -179,7 +179,7 @@ const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
   return (
     
 <Container className={classes.container} maxWidth="md">
-
+      <NavBar />
       <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           บันทึกคำร้องสำเร็จ
