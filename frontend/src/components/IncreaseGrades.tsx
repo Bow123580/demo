@@ -15,6 +15,8 @@ import TableRow from "@material-ui/core/TableRow";
 import { IncreaseGradesInterface } from "../models/IIncreaseGrades";
 import { format } from 'date-fns'
 
+import NavBar from "./NavBar";
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         container: {
@@ -61,6 +63,7 @@ function IncreaseGrades() {
 
     return (
         <div>
+            <NavBar />
             <Container className={classes.container} maxWidth="lg">
                 <Box display="flex">
                     <Box flexGrow={1}>
