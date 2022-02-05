@@ -15,6 +15,8 @@ import TableRow from "@material-ui/core/TableRow";
 import { ExamScheduleInterface } from "../models/IExamSchedule";
 import { format } from 'date-fns'
 
+import NavBar from "./NavBar";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -60,6 +62,7 @@ function ExamSchedules() {
   return (
     <div>
       <Container className={classes.container} maxWidth="md">
+        <NavBar />
         <Box display="flex">
           <Box flexGrow={2}>
             <Typography
