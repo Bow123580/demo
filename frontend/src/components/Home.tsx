@@ -3,6 +3,8 @@ import Container from "@material-ui/core/Container";
 import { Button, Grid } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
 
+import NavBar from "./NavBar";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -22,6 +24,7 @@ function Home() {
 
   return (
     <div>
+      <NavBar />
       <Container className={classes.container} maxWidth="md">
         <h1 style={{ textAlign: "center" }}>ระบบลงทะเบียนเรียน</h1>
         <h3> </h3>
