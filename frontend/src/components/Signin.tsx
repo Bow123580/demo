@@ -10,9 +10,46 @@ import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { SigninInterface } from "../models/ISignin";
+import Box from '@material-ui/core/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: any;
+    value: any;
+  }
+  
+  function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+  
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box p={3}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }  
+  
+function a11yProps(index: number) {
+    return {
+      id: `full-width-tab-${index}`,
+      'aria-controls': `full-width-tabpanel-${index}`,
+    };
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +65,10 @@ function SignIn() {
   const [signin, setSignin] = useState<Partial<SigninInterface>>({});
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [value, setValue] = React.useState('0');
+
+  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+    setValue(newValue);}
 
   const loginStudent = () => {
     const apiUrl = "http://localhost:8080/student/login";
@@ -43,6 +84,7 @@ function SignIn() {
           setSuccess(true);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("uid", res.data.id);
+          localStorage.setItem("role", "student");//ส่ง id มาพร้อมกับ token
           window.location.reload()
         } else {
           setError(true);
@@ -64,6 +106,7 @@ function SignIn() {
           setSuccess(true);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("uid", res.data.id);
+          localStorage.setItem("role", "registrar");//ส่ง id มาพร้อมกับ token
           window.location.reload()
         } else {
           setError(true);
@@ -96,7 +139,7 @@ function SignIn() {
       </Snackbar>
       <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
-          อีเมลหรือรหัสผ่านไม่ถูกต้อง
+          ไอดีหรือรหัสผ่านไม่ถูกต้อง
         </Alert>
       </Snackbar>
       <CssBaseline />
@@ -107,8 +150,15 @@ function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
+        <Tabs
+        value={value}
+        onChange={handleChange} textColor="secondary" indicatorColor="secondary" aria-label="secondary tabs example" >
+        <Tab  label="Rgistrar" {...a11yProps(0)} />
+        <Tab  label="Student"  {...a11yProps(1)}/>
+      </Tabs>
+       <TabPanel value={value} index={0}>
 
-        <form className={classes.form} noValidate>
+       <form className={classes.form} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -121,45 +171,72 @@ function SignIn() {
             autoFocus
             value={signin.UserCode || ""}
             onChange={handleInputChange}
-          />
-
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="Password"
-            label="Password"
-            type="password"
-            id="Password"
-            autoComplete="current-password"
-            value={signin.Password || ""}
-            onChange={handleInputChange}
-          />
-          
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={loginStudent}
-          >
-            Sign In With Student
-          </Button>
-
-          <Button
-            fullWidth
-            variant="contained"
-            color="default"
-            className={classes.submit}
-            onClick={loginRegistrar}
-          >
-            Sign In With Registrar
-          </Button>
-        </form>
-      </div>
+            />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="Password"
+                label="Password"
+                type="password"
+                id="Password"
+                autoComplete="current-password"
+                value={signin.Password || ""}
+                onChange={handleInputChange}
+              />
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={loginRegistrar}
+              >
+                Sign In
+              </Button>
+            </form>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="UserCode"
+              label="ID Address"
+              name="UserCode"
+              autoComplete="usercode"
+              autoFocus
+              value={signin.UserCode || ""}
+              onChange={handleInputChange}
+            />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="Password"
+                label="Password"
+                type="password"
+                id="Password"
+                autoComplete="current-password"
+                value={signin.Password || ""}
+                onChange={handleInputChange}
+              />
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={loginStudent}
+              >
+                Sign In
+              </Button>
+            </form>
+          </TabPanel>
+        </div>
     </Container>
   );
 }
-
 export default SignIn;
