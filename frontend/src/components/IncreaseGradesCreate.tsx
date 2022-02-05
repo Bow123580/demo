@@ -22,6 +22,8 @@ import { MuiPickersUtilsProvider, KeyboardDateTimePicker, } from "@material-ui/p
 import DateFnsUtils from "@date-io/date-fns";
 import { TextField } from "@material-ui/core";
 
+import NavBar from "./NavBar";
+
 const Alert = (props: AlertProps) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
@@ -178,6 +180,7 @@ function IncreaseGradesCreate() {
 
     return (
         <Container className={classes.container} maxWidth="sm">
+            <NavBar />
             <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success">
                     บันทึกสำเร็จ
