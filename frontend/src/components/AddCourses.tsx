@@ -15,6 +15,8 @@ import TableRow from "@material-ui/core/TableRow";
 import { AddCoursesInterface } from "../models/IAddCourse";
 import { format } from 'date-fns'
 
+import NavBar from "./NavBar";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -61,6 +63,7 @@ function AddCourses() {
   return (
     <div>
       <Container className={classes.container} maxWidth="md">
+        <NavBar />
         <Box display="flex">
           <Box flexGrow={1}>
             <Typography
