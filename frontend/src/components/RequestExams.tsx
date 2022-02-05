@@ -15,6 +15,8 @@ import TableRow from "@material-ui/core/TableRow";
 import { RequestExamInterface } from "../models/IRequestExam";
 import { format } from 'date-fns'
 
+import NavBar from "./NavBar";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
@@ -60,6 +62,7 @@ function RequestExams() {
 
   return (
     <div>
+      <NavBar />
       <Container className={classes.container} maxWidth="xl">
         <Box display="flex">
           <Box flexGrow={1}>
