@@ -19,6 +19,8 @@ import { ProgramsInterface } from "../models/IProgram";
 import { TeachersInterface } from "../models/ITeacher";
 import { AddCoursesInterface } from "../models/IAddCourse";
 
+import NavBar from './NavBar';
+
 
 import {
   MuiPickersUtilsProvider,
@@ -182,6 +184,7 @@ function AddCourseCreate() {
 
   return (
     <Container className={classes.container} maxWidth="sm">
+      <NavBar />
       <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           บันทึกข้อมูลสำเร็จ
