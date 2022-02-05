@@ -19,6 +19,7 @@ type LoginPayload struct {
 type LoginResponse struct {
 	Token string `json:"token"`
 	ID    uint   `json:"id"`
+	role  string `json:"role"`
 }
 
 // POST /login
@@ -60,6 +61,7 @@ func LoginStudent(c *gin.Context) {
 	tokenResponse := LoginResponse{
 		Token: signedToken,
 		ID:    students.ID,
+		role: "student",
 	}
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
 }
@@ -101,6 +103,7 @@ func LoginRegistrar(c *gin.Context) {
 	tokenResponse := LoginResponse{
 		Token: signedToken,
 		ID:    registrars.ID,
+		role: "registrar",
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})
