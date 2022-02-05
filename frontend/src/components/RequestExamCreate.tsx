@@ -26,6 +26,8 @@ import { TeachersInterface } from "../models/ITeacher";
 import { RequestStatusesInterface } from "../models/IRequestStatus";
 import { RequestExamInterface } from "../models/IRequestExam";
 
+import NavBar from "./NavBar";
+
 import {
   MuiPickersUtilsProvider,
   KeyboardDateTimePicker,
@@ -230,6 +232,7 @@ function RequestExamCreate() {
 
   return (
     <Container className={classes.container} maxWidth="md">
+      <NavBar />
       <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           บันทึกคำร้องสำเร็จ
