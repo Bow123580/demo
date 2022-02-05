@@ -23,6 +23,8 @@ import { SemestersInterface } from "../models/ISemester";
 import { CoursesInterface } from "../models/ICourse";
 import { ExamScheduleInterface } from "../models/IExamSchedule";
 
+import NavBar from "./NavBar";
+
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
@@ -193,6 +195,7 @@ function ExamScheduleCreate(this: any) {
 
   return (
     <Container className={classes.container} maxWidth="md">
+      <NavBar />
       <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           บันทึกตารางสอบสำเร็จ
