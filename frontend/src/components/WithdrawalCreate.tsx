@@ -19,6 +19,8 @@ import { TeachersInterface } from "../models/ITeacher";
 import { SemestersInterface } from "../models/ISemester";
 import { WithdrawalsInterface } from "../models/IWithdrawal";
 
+import NavBar from "./NavBar";
+
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker, } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { TextField } from "@material-ui/core";
@@ -194,6 +196,7 @@ function WithdrawalCreate() {
 
     return (
         <Container className={classes.container} maxWidth="sm">
+            <NavBar />
             <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success">
                     บันทึกสำเร็จ
