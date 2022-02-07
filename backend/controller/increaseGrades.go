@@ -3,8 +3,8 @@ package controller
 import (
 	"net/http"
 
-	"github.com/PhatSut/demo/entity"
 	"github.com/gin-gonic/gin"
+	"github.com/sut64/team07/entity"
 )
 
 // POST /IncreaseGrades
@@ -40,12 +40,12 @@ func CreateIncreaseGrades(c *gin.Context) {
 	}
 	// 12: สร้าง IncreaseGrades
 	pm := entity.IncreaseGrades{
-		Grades:  Grades,  // โยงความสัมพันธ์กับ Entity Semester
-		Course:  Course,  // โยงความสัมพันธ์กับ Entity Course
-		Student: Student, // โยงความสัมพันธ์กับ Entity ExamType
-		Date:    IncreaseGrades.Date,
-		Credit:  IncreaseGrades.Credit,
-		Description:  IncreaseGrades.Description,
+		Grades:      Grades,  // โยงความสัมพันธ์กับ Entity Semester
+		Course:      Course,  // โยงความสัมพันธ์กับ Entity Course
+		Student:     Student, // โยงความสัมพันธ์กับ Entity ExamType
+		Date:        IncreaseGrades.Date,
+		GradePoint:  IncreaseGrades.GradePoint,
+		Description: IncreaseGrades.Description,
 	}
 
 	// 13: บันทึก
