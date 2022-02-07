@@ -1,55 +1,37 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { Button, Grid } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
 
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
+const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
+
     container: {
       marginTop: theme.spacing(2),
     },
-    table: {
-      minWidth: 650,
-    },
-    tableSpace: {
-      marginTop: 20,
-    },
+
   })
 );
 
-function Home() {
+export default function Home() {
   const classes = useStyles();
-
   return (
     <div>
       <NavBar />
+      <div className={classes.drawerHeader} />
       <Container className={classes.container} maxWidth="md">
         <h1 style={{ textAlign: "center" }}>ระบบลงทะเบียนเรียน</h1>
-        <h3> </h3>
-
-        {/* <Grid item xs={12}>
-          <Button
-            component={RouterLink}
-            style={{ float: "left" }}
-            to="/students"
-            variant="contained"
-            color="inherit"
-          >
-            นักศึกษา
-          </Button><Button
-            component={RouterLink}
-            style={{ float: "right" }}
-            to="/registrars"
-            variant="contained"
-            color="inherit"
-          >
-            ฝ่ายทะเบียน
-          </Button>
-        </Grid> */}
+        <h2>ยินดีต้อนรับสู่ระบบลงทะเรียน</h2>
       </Container>
-    </div >
+    </div>
   );
 }
-export default Home;

@@ -25,8 +25,7 @@ import { CoursesInterface } from "../models/ICourse";
 import { TeachersInterface } from "../models/ITeacher";
 import { RequestStatusesInterface } from "../models/IRequestStatus";
 import { RequestExamInterface } from "../models/IRequestExam";
-
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 import {
   MuiPickersUtilsProvider,
@@ -53,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function RequestExamCreate() {
+export default function RequestExamCreate() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [students, setStudents] = useState<Partial<StudentsInterface>>({});
@@ -449,5 +448,3 @@ function RequestExamCreate() {
     </Container>
   );
 }
-
-export default RequestExamCreate;

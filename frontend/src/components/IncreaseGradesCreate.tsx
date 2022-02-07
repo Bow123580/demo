@@ -21,8 +21,7 @@ import { IncreaseGradesInterface } from "../models/IIncreaseGrades";
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker, } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { TextField } from "@material-ui/core";
-
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 const Alert = (props: AlertProps) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -43,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-function IncreaseGradesCreate() {
+export default function IncreaseGradesCreate() {
     const classes = useStyles();
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [increasegrades, setIncreaseGrades] = useState<Partial<IncreaseGradesInterface>>({});
@@ -150,7 +149,7 @@ function IncreaseGradesCreate() {
             StudentID: convertType(increasegrades.StudentID),
             CourseID: convertType(increasegrades.CourseID),
             GradesID: convertType(increasegrades.GradesID),
-            Credit: convertType(increasegrades.Credit),
+            GradePoint: +(increasegrades.GradePoint ?? ""),
             Description: increasegrades.Description ?? "",
             Date: selectedDate || "",
         };
@@ -265,18 +264,19 @@ function IncreaseGradesCreate() {
                             <Typography
                                 color="textPrimary"
                             >
-                                หน่วยกิต
+                                คะแนน
                             </Typography>
+                            <option aria-label="None" value="">
+                                กรุณาใส่คะแนน
+                            </option>
                             <TextField
-                                id="Credit"
+                                id="GradePoint"
                                 variant="outlined"
                                 type="number"
                                 size="medium"
-                                placeholder="กรุณาใส่หน่วยกิต"
-                                value={increasegrades.Credit || ""}
+                                value={increasegrades.GradePoint || ""}
                                 onChange={handleInputChange}
                             />
-
                         </FormControl>
                     </Grid>
 
@@ -371,5 +371,3 @@ function IncreaseGradesCreate() {
         </Container>
     );
 }
-
-export default IncreaseGradesCreate;

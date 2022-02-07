@@ -14,8 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { IncreaseGradesInterface } from "../models/IIncreaseGrades";
 import { format } from 'date-fns'
-
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-function IncreaseGrades() {
+export default function IncreaseGrades() {
     const classes = useStyles();
     const [increasegrades, setIncreaseGrades] = useState<IncreaseGradesInterface[]>([]);
 
@@ -98,7 +97,7 @@ function IncreaseGrades() {
                                     รายวิชา
                                 </TableCell>
                                 <TableCell align="center" width="5%">
-                                    หน่วยกิต
+                                    คะแนน
                                 </TableCell>
                                 <TableCell align="center" width="5%">
                                     ผลการเรียน
@@ -116,7 +115,7 @@ function IncreaseGrades() {
                                 <TableRow key={item.ID}>
                                     <TableCell align="center">{item.Student.ID_student}</TableCell>
                                     <TableCell align="center">{item.Course.Coursename}</TableCell>
-                                    <TableCell align="center">{item.Credit}</TableCell>
+                                    <TableCell align="center">{item.GradePoint}</TableCell>
                                     <TableCell align="center">{item.Grades.Grade}</TableCell>
                                     <TableCell align="center">{item.Description}</TableCell>
                                     <TableCell align="center">{format((new Date(item.Date)), 'dd MMMM yyyy hh:mm a')}</TableCell>
@@ -129,5 +128,3 @@ function IncreaseGrades() {
         </div>
     );
 }
-
-export default IncreaseGrades;

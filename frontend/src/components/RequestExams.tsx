@@ -14,8 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { RequestExamInterface } from "../models/IRequestExam";
 import { format } from 'date-fns'
-
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function RequestExams() {
+export default function RequestExams() {
   const classes = useStyles();
   const [requestexams, setRequestExams] = useState<RequestExamInterface[]>([]);
   const apiUrl = "http://localhost:8080";
@@ -141,4 +140,3 @@ function RequestExams() {
     </div>
   );
 }
-export default RequestExams;

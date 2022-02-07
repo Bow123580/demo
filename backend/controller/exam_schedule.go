@@ -3,9 +3,9 @@ package controller
 import (
 	"net/http"
 
-	"github.com/PhatSut/demo/entity"
-	"github.com/gin-gonic/gin"
 	"github.com/asaskevich/govalidator"
+	"github.com/gin-gonic/gin"
+	"github.com/PhatSut/demo/entity"
 )
 
 // POST /ExamSchedules
@@ -23,48 +23,48 @@ func CreateExamSchedule(c *gin.Context) {
 	}
 
 
-	// 9: ค้นหา Course ด้วย id
-	if tx := entity.DB().Where("id = ?", ExamSchedule.CourseID).First(&Course); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
-		return
-	}
-
-	// 10: ค้นหา Semester ด้วย id
+	// 9: ค้นหา Semester ด้วย id
 	if tx := entity.DB().Where("id = ?", ExamSchedule.SemesterID).First(&Semester); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Semester not found"})
 		return
 	}
 
-	// 11: ค้นหา ExamType ด้วย id
+	// 10: ค้นหา ExamType ด้วย id
 	if tx := entity.DB().Where("id = ?", ExamSchedule.ExamTypeID).First(&ExamType); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "ExamType not found"})
 		return
 	}
+
+	// 11: ค้นหา Course ด้วย id
+	if tx := entity.DB().Where("id = ?", ExamSchedule.CourseID).First(&Course); tx.RowsAffected == 0 {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Course not found"})
+		return
+	}
+
 	// 12: สร้าง ExamSchedule
-	es := entity.ExamSchedule{
+	pm := entity.ExamSchedule{
 		Semester: Semester,       // โยงความสัมพันธ์กับ Entity Semester
-		AcademicYear: ExamSchedule.AcademicYear,
+		Course:    Course,     // โยงความสัมพันธ์กับ Entity Course
 		ExamType:  ExamType,        // โยงความสัมพันธ์กับ Entity ExamType
-		Course:         Course,               // โยงความสัมพันธ์กับ Entity Course
+		AcademicYear: ExamSchedule.AcademicYear,
 		RoomExam: ExamSchedule.RoomExam,
-		DateExam: ExamSchedule.DateExam,
+		ExamDate: ExamSchedule.ExamDate,
 		StartTime: ExamSchedule.StartTime,
 		EndTime: ExamSchedule.EndTime,
 	}
 
 	// แทรกการ validate ไว้ช่วงนี้ของ controller
-	if _, err := govalidator.ValidateStruct(es); err != nil {
+	if _, err := govalidator.ValidateStruct(pm); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
 
 	// 13: บันทึก
-	if err := entity.DB().Create(&es).Error; err != nil {
+	if err := entity.DB().Create(&pm).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	c.JSON(http.StatusOK, gin.H{"data": es})
+	c.JSON(http.StatusOK, gin.H{"data": pm})
 }
 
 // GET /ExamSchedule/:id

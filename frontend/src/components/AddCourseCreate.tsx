@@ -18,8 +18,7 @@ import { CoursesInterface } from "../models/ICourse";
 import { ProgramsInterface } from "../models/IProgram";
 import { TeachersInterface } from "../models/ITeacher";
 import { AddCoursesInterface } from "../models/IAddCourse";
-
-import NavBar from './NavBar';
+import NavBar from "./Navbar";
 
 
 import {
@@ -47,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function AddCourseCreate() {
+export default function AddCourseCreate() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [courses, setCourses] = useState<CoursesInterface[]>([]);
@@ -382,5 +381,3 @@ function AddCourseCreate() {
     </Container>
   );
 }
-
-export default AddCourseCreate;

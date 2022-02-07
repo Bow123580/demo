@@ -19,14 +19,13 @@ import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 
 
 import { StudentsInterface } from "../models/IStudent";
-import { PetitionsInterface } from "../models/IPettition";
+import { PetitionsInterface } from "../models/IPetition";
 import { CoursesInterface } from "../models/ICourse";
 import { RecordPetitionInterface } from "../models/IRecordPetition";
 import { TextField } from "@material-ui/core";
 import { KeyboardDateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 
 const Alert = (props: AlertProps) => {
@@ -48,7 +47,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function RecordPetitionCreate() {
+export default function RecordPetitionCreate() {
   const classes = useStyles();
   const [students, setStudents] = useState<Partial<StudentsInterface>>({});
   const [petitions, setPetitions] = useState<PetitionsInterface[]>([]);
@@ -179,7 +178,7 @@ const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
   return (
     
 <Container className={classes.container} maxWidth="md">
-      <NavBar />
+<NavBar />
       <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success">
           บันทึกคำร้องสำเร็จ
@@ -360,5 +359,3 @@ const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
 
   );
 }
-
-export default RecordPetitionCreate;

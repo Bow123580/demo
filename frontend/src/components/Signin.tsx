@@ -10,51 +10,47 @@ import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { SigninInterface } from "../models/ISignin";
-import Box from '@material-ui/core/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-
+import { AppBar, Tabs, Tab, Box, Card } from "@material-ui/core";
 
 function Alert(props: AlertProps) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 interface TabPanelProps {
-    children?: React.ReactNode;
-    index: any;
-    value: any;
-  }
-  
-  function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-  
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box p={3}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }  
-  
-function a11yProps(index: number) {
-    return {
-      id: `full-width-tab-${index}`,
-      'aria-controls': `full-width-tabpanel-${index}`,
-    };
+  children?: React.ReactNode;
+  index: any;
+  value: any;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={2}><Typography>{children}</Typography></Box>
+      )}
+    </div>
+  );
+}
+
+function a11yProps(index: any) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
 }
 
 const useStyles = makeStyles((theme) => ({
-  paper: { marginTop: theme.spacing(8), display: "flex", flexDirection: "column", alignItems: "center", },
-  avatar: { margin: theme.spacing(1), backgroundColor: theme.palette.secondary.main, },
+  card: {marginTop: theme.spacing(7),},
+  paper: { marginTop: theme.spacing(5), display: "flex", flexDirection: "column", alignItems: "center", },
+  avatar: { margin: theme.spacing(2), backgroundColor: theme.palette.secondary.main, },
   form: { width: "100%", marginTop: theme.spacing(1), },
   submit: { margin: theme.spacing(3, 0, 2), },
 }));
@@ -65,10 +61,7 @@ function SignIn() {
   const [signin, setSignin] = useState<Partial<SigninInterface>>({});
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const [value, setValue] = React.useState('0');
-
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);}
+  const [value, setValue] = React.useState(0);
 
   const loginStudent = () => {
     const apiUrl = "http://localhost:8080/student/login";
@@ -84,7 +77,7 @@ function SignIn() {
           setSuccess(true);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("uid", res.data.id);
-          localStorage.setItem("role", "student");//ส่ง id มาพร้อมกับ token
+          localStorage.setItem("role", res.data.role);
           window.location.reload()
         } else {
           setError(true);
@@ -106,12 +99,16 @@ function SignIn() {
           setSuccess(true);
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("uid", res.data.id);
-          localStorage.setItem("role", "registrar");//ส่ง id มาพร้อมกับ token
+          localStorage.setItem("role", res.data.role);
           window.location.reload()
         } else {
           setError(true);
         }
       });
+  };
+
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
   };
 
   const handleInputChange = (
@@ -130,6 +127,7 @@ function SignIn() {
     setError(false);
   };
 
+
   return (
     <Container component="main" maxWidth="xs">
       <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
@@ -143,35 +141,76 @@ function SignIn() {
         </Alert>
       </Snackbar>
       <CssBaseline />
-      <div className={classes.paper}>
+     <Card className={classes.card}> 
+       <div className={classes.paper} >
+        
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <Tabs
-        value={value}
-        onChange={handleChange} textColor="secondary" indicatorColor="secondary" aria-label="secondary tabs example" >
-        <Tab  label="Rgistrar" {...a11yProps(0)} />
-        <Tab  label="Student"  {...a11yProps(1)}/>
-      </Tabs>
-       <TabPanel value={value} index={0}>
 
-       <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="UserCode"
-            label="ID Address"
-            name="UserCode"
-            autoComplete="usercode"
-            autoFocus
-            value={signin.UserCode || ""}
-            onChange={handleInputChange}
-            />
+            <Tabs value={value} onChange={handleChange} textColor="primary" indicatorColor="secondary" aria-label="simple tabs example" >
+              <Tab label="นักศึกษา" {...a11yProps(0)} />
+              <Tab label="ฝ่ายทะเบียน" {...a11yProps(1)} />
+            </Tabs>
+
+          <TabPanel value={value} index={0}>
+
+            <form className={classes.form} noValidate >
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="UserCode"
+                label="ID Address"
+                name="UserCode"
+                autoComplete="usercode"
+                autoFocus
+                value={signin.UserCode || ""}
+                onChange={handleInputChange}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="Password"
+                label="Password"
+                type="password"
+                id="Password"
+                autoComplete="current-password"
+                value={signin.Password || ""}
+                onChange={handleInputChange}
+              />
+              <Button
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                onClick={loginStudent}
+              >
+                Sign In 
+              </Button>
+            </form>
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <form className={classes.form} noValidate>
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="UserCode"
+                label="ID Address"
+                name="UserCode"
+                autoComplete="usercode"
+                autoFocus
+                value={signin.UserCode || ""}
+                onChange={handleInputChange}
+              />
               <TextField
                 variant="outlined"
                 margin="normal"
@@ -196,47 +235,11 @@ function SignIn() {
               </Button>
             </form>
           </TabPanel>
-          <TabPanel value={value} index={1}>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="UserCode"
-              label="ID Address"
-              name="UserCode"
-              autoComplete="usercode"
-              autoFocus
-              value={signin.UserCode || ""}
-              onChange={handleInputChange}
-            />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="Password"
-                label="Password"
-                type="password"
-                id="Password"
-                autoComplete="current-password"
-                value={signin.Password || ""}
-                onChange={handleInputChange}
-              />
-              <Button
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={loginStudent}
-              >
-                Sign In
-              </Button>
-            </form>
-          </TabPanel>
+          
         </div>
+        </Card>
     </Container>
   );
 }
+
 export default SignIn;

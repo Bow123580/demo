@@ -22,8 +22,7 @@ import { ExamTypesInterface } from "../models/IExamType";
 import { SemestersInterface } from "../models/ISemester";
 import { CoursesInterface } from "../models/ICourse";
 import { ExamScheduleInterface } from "../models/IExamSchedule";
-
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 import {
   MuiPickersUtilsProvider,
@@ -32,6 +31,7 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { TextField } from "@material-ui/core";
+
 
 const Alert = (props: AlertProps) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function ExamScheduleCreate(this: any) {
+export default function ExamScheduleCreate() {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectTimeStart, setSelectedTimeStart] = useState<Date | null>(new Date());
@@ -165,7 +165,7 @@ function ExamScheduleCreate(this: any) {
       ExamTypeID: convertType(ExamSchedule.ExamTypeID),
       CourseID: convertType(ExamSchedule.CourseID),
       RoomExam: ExamSchedule.RoomExam ?? "",
-      DateExam: selectedDate,
+      ExamDate: selectedDate,
       StartTime: selectTimeStart,
       EndTime: selectedTimeend,
     };
@@ -186,9 +186,10 @@ function ExamScheduleCreate(this: any) {
       .then((res) => {
         if (res.data) {
           setSuccess(true);
+          setErrorMessage("");
         } else {
           setError(true);
-          setErrorMessage(res.error)
+          setErrorMessage(res.error);
         }
       });
   }
@@ -203,7 +204,7 @@ function ExamScheduleCreate(this: any) {
       </Snackbar>
       <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
-          บันทึกตารางสอบไม่สำเร็จ: {errorMessage}
+        บันทึกตารางสอบไม่สำเร็จ: {errorMessage}
         </Alert>
       </Snackbar>
       <Paper className={classes.paper}>
@@ -221,7 +222,7 @@ function ExamScheduleCreate(this: any) {
         </Box>
         <Divider />
         <Grid container spacing={3} className={classes.root}>
-          <Grid item xs={6}>
+        <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
               <p>ภาคการศึกษา</p>
               <Select
@@ -295,7 +296,7 @@ function ExamScheduleCreate(this: any) {
                 </option>
                 {Courses.map((item: CoursesInterface) => (
                   <option value={item.ID} key={item.ID}>
-                    {item.Coursename}
+                    {item.Coursenumber} - {item.Coursename}
                   </option>
                 ))}
               </Select>
@@ -320,7 +321,7 @@ function ExamScheduleCreate(this: any) {
               <p>วันที่สอบ</p>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
-                  name="DateExam"
+                  name="ExamDate"
                   value={selectedDate}
                   onChange={handleDateChange}
                   label="กรุณาเลือกวันสอบ"
@@ -330,7 +331,7 @@ function ExamScheduleCreate(this: any) {
             </FormControl>
           </Grid>
           <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
+          <FormControl fullWidth variant="outlined">
               <p>เวลาเริ่มต้น</p>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardTimePicker
@@ -344,7 +345,7 @@ function ExamScheduleCreate(this: any) {
             </FormControl>
           </Grid>
           <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
+          <FormControl fullWidth variant="outlined">
               <p>เวลาสิ้นสุด</p>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardTimePicker
@@ -379,5 +380,3 @@ function ExamScheduleCreate(this: any) {
     </Container>
   );
 }
-
-export default ExamScheduleCreate;

@@ -1,8 +1,6 @@
 package entity
 
 import (
-	"time"
-
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -19,24 +17,24 @@ func SetupDatabase() {
 	if err != nil {
 		panic("failed to connect database")
 	}
-	
 	database.AutoMigrate(
-		&Semester{},
-		&ExamType{},
-		&Course{},
-		&ExamSchedule{},
 		&Teacher{},
 		&Student{},
-		&Withdrawal{},
-		&AddCourse{},
-		&Registrar{},
+		&Semester{},
+		&ExamType{},
 		&Program{},
-		&RequestStatus{},
+		&Course{},
+		&ExamSchedule{},
+		&AddCourse{},
 		&Petition{},
+		&Registrar{},
+		&IncreaseGrades{},
+		&Grades{},
+		&RequestStatus{},
 		&RequestExam{},
 		&RecordPetition{},
-		&Grades{},
-		&IncreaseGrades{},
+		&RegisCourse{},
+		&Withdrawal{},
 	)
 
 	db = database
@@ -81,7 +79,7 @@ func SetupDatabase() {
 
 	registrar5 := Registrar{
 		ID_registrar: "R5901258",
-		Prefix:       "Mr.",
+		Prefix:       "Miss",
 		Name:         "Jeeninee Khuptawuttinun",
 		Email:        "Jeeninee@gmail.com",
 		Password:     string(password),
@@ -200,42 +198,37 @@ func SetupDatabase() {
 		Coursenumber: 523332,
 	}
 	db.Model(&Course{}).Create(&course1)
-
 	course2 := Course{
 		Coursename:   "COMPUTER AND COMMUNICATION",
 		Coursenumber: 523352,
 	}
 	db.Model(&Course{}).Create(&course2)
-
 	course3 := Course{
 		Coursename:   "OPERATING SYSTEMS",
 		Coursenumber: 523354,
 	}
 	db.Model(&Course{}).Create(&course3)
-
 	course4 := Course{
 		Coursename:   "System Analysis and Design",
 		Coursenumber: 523331,
 	}
 	db.Model(&Course{}).Create(&course4)
-
 	course5 := Course{
 		Coursename:   "DATABASE SYSTEMS",
 		Coursenumber: 523211,
 	}
 	db.Model(&Course{}).Create(&course5)
-
 	course6 := Course{
 		Coursename:   "COMPUTER STATISTICS",
 		Coursenumber: 523301,
 	}
 	db.Model(&Course{}).Create(&course6)
 
+	// Program data
 	program1 := Program{
 		Programname: "Thai Program",
 	}
 	db.Model(&Program{}).Create(&program1)
-
 	program2 := Program{
 		Programname: "International Program",
 	}
@@ -257,55 +250,22 @@ func SetupDatabase() {
 	}
 	db.Model(&Semester{}).Create(&Semester3)
 
-	//ExamType Data
-	type1 := ExamType{
-		Type: "กลางภาค",
-	}
-	db.Model(&ExamType{}).Create(&type1)
-
-	type2 := ExamType{
-		Type: "ปลายภาค",
-	}
-
-	db.Model(&ExamType{}).Create(&type2)
-
-	addcourse1 := AddCourse{
-		Course:   course1,
-		Program:  program1,
-		Teacher:  teacher1,
-		Credit:   4,
-		DayTime:  "TUE 18.00-21.00",
-		SaveTime: time.Now(),
-	}
-	db.Model(&AddCourse{}).Create(&addcourse1)
-
-	db.Model(&Withdrawal{}).Create(&Withdrawal{
-		Student:        student1,
-		Course:         course1,
-		Teacher:        teacher1,
-		Semester:       Semester1,
-		YearTime:       2022,
-		RemainCredit:   20,
-		Reason:         "ttt",
-		WithdrawalTime: time.Now(),
-	})
-
+	//RequestStatus Data
 	status1 := RequestStatus{
 		Status: "รอดำเนินการ",
 	}
 	db.Model(&RequestStatus{}).Create(&status1)
 
-	status2 := RequestStatus{
+	/*status2 := RequestStatus{
 		Status: "กำลังดำเนินการ",
 	}
 	db.Model(&RequestStatus{}).Create(&status2)
-
 	status3 := RequestStatus{
 		Status: "ดำเนินการสำเร็จแล้ว",
 	}
-	db.Model(&RequestStatus{}).Create(&status3)
+	db.Model(&RequestStatus{}).Create(&status3)*/
 
-	// Claim data
+	//
 	claim1 := Petition{
 		Claim: "เกินกว่าหน่วยกิตกำหนด",
 	}
@@ -315,7 +275,15 @@ func SetupDatabase() {
 	}
 	db.Model(&Petition{}).Create(&claim2)
 
-	//Grades Data
+	// ExamType Data
+	type1 := ExamType{
+		Type: "กลางภาค",
+	}
+	db.Model(&ExamType{}).Create(&type1)
+	type2 := ExamType{
+		Type: "ปลายภาค",
+	}
+	db.Model(&ExamType{}).Create(&type2)
 	grade1 := Grades{
 		Grade: "A",
 	}
@@ -348,5 +316,84 @@ func SetupDatabase() {
 		Grade: "F",
 	}
 	db.Model(&Grades{}).Create(&grade8)
+
+	regis1 := RegisCourse{
+		Student: student2,
+		Course:  course4,
+	}
+	db.Model(&RegisCourse{}).Create(&regis1)
+
+	// ข้อมูล regiscourse
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student2,
+		Course:  course1,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student2,
+		Course:  course2,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student2,
+		Course:  course3,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student1,
+		Course:  course4,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student1,
+		Course:  course5,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student1,
+		Course:  course6,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student3,
+		Course:  course1,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student3,
+		Course:  course2,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student4,
+		Course:  course3,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student4,
+		Course:  course4,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student5,
+		Course:  course5,
+	})
+
+	db.Model(&RegisCourse{}).Create(&RegisCourse{
+		Student: student5,
+		Course:  course6,
+	})
+
+	// // ข้อมูล Withdrawal
+	// db.Model(&Withdrawal{}).Create(&Withdrawal{
+	// 	Student:        student2,
+	// 	RegisCourse:    regis1,
+	// 	Teacher:        teacher1,
+	// 	Semester:       Semester1,
+	// 	YearTime:       2564,
+	// 	Reason:         "so hard",
+	// 	RemainCredit:   15,
+	// 	WithdrawalTime: time.Now(),
+	// })
 
 }

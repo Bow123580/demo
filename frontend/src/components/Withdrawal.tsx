@@ -14,8 +14,8 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { WithdrawalsInterface } from "../models/IWithdrawal";
 import { format } from 'date-fns'
+import NavBar from "./Navbar";
 
-import NavBar from "./NavBar";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-function Withdrawals() {
+export default function Withdrawals() {
     const classes = useStyles();
     const [withdrawals, setWithdrawals] = useState<WithdrawalsInterface[]>([]);
 
@@ -95,7 +95,7 @@ function Withdrawals() {
                                 <TableCell align="center" width="2%">
                                     นักศึกษา
                                 </TableCell>
-                                <TableCell align="center" width="5%">
+                                <TableCell align="center" width="10%">
                                     รายวิชา
                                 </TableCell>
                                 <TableCell align="center" width="5%">
@@ -122,7 +122,7 @@ function Withdrawals() {
                             {withdrawals.map((wd: WithdrawalsInterface) => (
                                 <TableRow key={wd.ID}>
                                     <TableCell align="center">{wd.Student.ID_student}</TableCell>
-                                    <TableCell align="center">{wd.Course.Coursename}</TableCell>
+                                    <TableCell align="center">{wd.RegisCourse.Course.Coursenumber} {wd.RegisCourse.Course.Coursename} </TableCell>
                                     <TableCell align="center">{wd.Teacher.Name}</TableCell>
                                     <TableCell align="center">{wd.Semester.Semester}</TableCell>
                                     <TableCell align="center">{wd.YearTime}</TableCell>
@@ -138,5 +138,3 @@ function Withdrawals() {
         </div>
     );
 }
-
-export default Withdrawals;

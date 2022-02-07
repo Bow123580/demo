@@ -14,8 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { ExamScheduleInterface } from "../models/IExamSchedule";
 import { format } from 'date-fns'
-
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function ExamSchedules() {
+export default function ExamSchedules() {
   const classes = useStyles();
   const [ExamSchedule, setExamSchedules] = useState<ExamScheduleInterface[]>([]);
   const apiUrl = "http://localhost:8080";
@@ -61,8 +60,8 @@ function ExamSchedules() {
 
   return (
     <div>
-      <Container className={classes.container} maxWidth="md">
-        <NavBar />
+      <NavBar />
+      <Container className={classes.container} maxWidth="lg">
         <Box display="flex">
           <Box flexGrow={2}>
             <Typography
@@ -89,19 +88,19 @@ function ExamSchedules() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="12%">
                   ภาคการศึกษา
                 </TableCell>
                 <TableCell align="center" width="10%">
                   ปีการศึกษา
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="15%">
                   ประเภทการจัดสอบ
                 </TableCell>
-                <TableCell align="center" width="20%">
+                <TableCell align="center" width="17%">
                   ชื่อรายวิชา
                 </TableCell>
-                <TableCell align="center" width="10%">
+                <TableCell align="center" width="8%">
                   ห้องสอบ
                 </TableCell>
                 <TableCell align="center" width="15%">
@@ -123,7 +122,7 @@ function ExamSchedules() {
                   <TableCell align="center">{item.ExamType.Type}</TableCell>
                   <TableCell align="center">{item.Course.Coursename}</TableCell>
                   <TableCell align="center">{item.RoomExam}</TableCell>
-                  <TableCell align="center">{format((new Date(item.DateExam)), 'dd MMMM yyyy')}</TableCell>
+                  <TableCell align="center">{format((new Date(item.ExamDate)), 'dd MMMM yyyy')}</TableCell>
                   <TableCell align="center">{format((new Date(item.StartTime)),'hh:mm a')}</TableCell>
                   <TableCell align="center">{format((new Date(item.EndTime)),'hh:mm a')}</TableCell>
                 </TableRow>
@@ -135,5 +134,3 @@ function ExamSchedules() {
     </div>
   );
 }
-
-export default ExamSchedules;

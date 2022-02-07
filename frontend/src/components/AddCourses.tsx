@@ -14,8 +14,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { AddCoursesInterface } from "../models/IAddCourse";
 import { format } from 'date-fns'
-
-import NavBar from "./NavBar";
+import NavBar from "./Navbar";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-function AddCourses() {
+export default function AddCourses() {
   const classes = useStyles();
   const [addcourse, setAddCourses] = useState<AddCoursesInterface[]>([]);
   const apiUrl = "http://localhost:8080";
@@ -62,8 +61,8 @@ function AddCourses() {
 
   return (
     <div>
+      <NavBar />
       <Container className={classes.container} maxWidth="md">
-        <NavBar />
         <Box display="flex">
           <Box flexGrow={1}>
             <Typography
@@ -82,7 +81,7 @@ function AddCourses() {
               variant="contained"
               color="primary"
             >
-              สร้างข้อมูล
+              เพิ่มรายวิชาที่จะเปิดสอน
             </Button>
           </Box>
         </Box>
@@ -90,22 +89,22 @@ function AddCourses() {
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="center" width="30%">
+                <TableCell align="center" width="10%">
                   ชื่อรายวิชา
                 </TableCell>
-                <TableCell align="center" width="20%">
+                <TableCell align="center" width="10%">
                   รหัสรายวิชา
                 </TableCell>
-                <TableCell align="center" width="20%">
+                <TableCell align="center" width="10%">
                   หลักสูตร
                 </TableCell>
-                <TableCell align="center" width="40%">
+                <TableCell align="center" width="10%">
                   อาจารย์ผู้สอน
                 </TableCell>
                 <TableCell align="center" width="10%">
                   จำนวนหน่วยกิต
                 </TableCell>
-                <TableCell align="center" width="50%">
+                <TableCell align="center" width="10%">
                   วันที่เวลาที่สอน
                 </TableCell>
                 <TableCell align="center" width="10%">
@@ -132,5 +131,3 @@ function AddCourses() {
     </div>
   );
 }
-
-export default AddCourses;
