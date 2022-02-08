@@ -27,6 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
     tableSpace: {
       marginTop: 10,
     },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
   })
 );
 
@@ -62,6 +70,7 @@ export default function RequestExams() {
   return (
     <div>
       <NavBar />
+      <div className={classes.drawerHeader} />
       <Container className={classes.container} maxWidth="xl">
         <Box display="flex">
           <Box flexGrow={1}>
@@ -122,7 +131,7 @@ export default function RequestExams() {
               {requestexams.map((item: RequestExamInterface) => (
                 <TableRow key={item.ID}>
                   <TableCell align="center">{item.ID}</TableCell>
-                  <TableCell align="center">{item.Student.Name}</TableCell>
+                  <TableCell align="center">{item.Student.ID_student}</TableCell>
                   <TableCell align="center">{item.Semester.Semester}</TableCell>
                   <TableCell align="center">{item.AcademicYear}</TableCell>
                   <TableCell align="center">{item.Course.Coursename}</TableCell>

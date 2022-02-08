@@ -28,6 +28,14 @@ const useStyles = makeStyles((theme: Theme) =>
         tableSpace: {
             marginTop: 20,
         },
+        drawerHeader: {
+            display: 'flex',
+            alignItems: 'center',
+            padding: theme.spacing(0, 1),
+            // necessary for content to be below app bar
+            ...theme.mixins.toolbar,
+            justifyContent: 'flex-end',
+        },
     })
 );
 
@@ -44,7 +52,7 @@ export default function Withdrawals() {
         },
     };
 
-    const getWithdrawals= async () => {
+    const getWithdrawals = async () => {
         let uid = localStorage.getItem("uid");
         fetch(`${apiUrl}/withdrawals/${uid}`, requestOptions)
             .then((response) => response.json())
@@ -65,6 +73,7 @@ export default function Withdrawals() {
     return (
         <div>
             <NavBar />
+            <div className={classes.drawerHeader} />
             <Container className={classes.container} maxWidth="lg">
                 <Box display="flex">
                     <Box flexGrow={1}>
@@ -95,7 +104,7 @@ export default function Withdrawals() {
                                 <TableCell align="center" width="2%">
                                     นักศึกษา
                                 </TableCell>
-                                <TableCell align="center" width="10%">
+                                <TableCell align="center" width="5%">
                                     รายวิชา
                                 </TableCell>
                                 <TableCell align="center" width="5%">
@@ -122,7 +131,7 @@ export default function Withdrawals() {
                             {withdrawals.map((wd: WithdrawalsInterface) => (
                                 <TableRow key={wd.ID}>
                                     <TableCell align="center">{wd.Student.ID_student}</TableCell>
-                                    <TableCell align="center">{wd.RegisCourse.Course.Coursenumber} {wd.RegisCourse.Course.Coursename} </TableCell>
+                                    <TableCell align="center">{wd.RegisCourse.CourseID}</TableCell>
                                     <TableCell align="center">{wd.Teacher.Name}</TableCell>
                                     <TableCell align="center">{wd.Semester.Semester}</TableCell>
                                     <TableCell align="center">{wd.YearTime}</TableCell>
@@ -138,3 +147,4 @@ export default function Withdrawals() {
         </div>
     );
 }
+

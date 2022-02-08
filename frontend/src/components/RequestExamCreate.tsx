@@ -25,13 +25,13 @@ import { CoursesInterface } from "../models/ICourse";
 import { TeachersInterface } from "../models/ITeacher";
 import { RequestStatusesInterface } from "../models/IRequestStatus";
 import { RequestExamInterface } from "../models/IRequestExam";
-import NavBar from "./Navbar";
 
 import {
   MuiPickersUtilsProvider,
   KeyboardDateTimePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import NavBar from "./Navbar";
 
 const Alert = (props: AlertProps) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -49,6 +49,14 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       color: theme.palette.text.secondary,
     },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
   })
 );
 
@@ -64,6 +72,7 @@ export default function RequestExamCreate() {
   const [requestexam, setRequestExam] = useState<Partial<RequestExamInterface>>({});
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
 
   const apiUrl = "http://localhost:8080";
@@ -96,15 +105,15 @@ export default function RequestExamCreate() {
   const handleInputChange = (
 
     event: React.ChangeEvent<{ id?: string; value: any }>
- 
+
   ) => {
- 
+
     const id = event.target.id as keyof typeof RequestExamCreate;
- 
+
     const { value } = event.target;
- 
+
     setRequestExam({ ...requestexam, [id]: value });
- 
+
   };
 
 
@@ -201,7 +210,7 @@ export default function RequestExamCreate() {
       Tel: requestexam.Tel ?? "",
       TeacherID: convertType(requestexam.TeacherID),
       RequestStatusID: convertType(requestexam.RequestStatusID),
-      
+
       RequestTime: selectedDate,
     };
 
@@ -217,178 +226,182 @@ export default function RequestExamCreate() {
     };
 
     fetch(`${apiUrl}/request_exams`, requestOptionsPost)
-    .then((response) => response.json())
-    .then((res) => {
-      if (res.data) {
-        console.log("บันทึกได้")
-        setSuccess(true);
-      } else {
-        console.log("บันทึกไม่ได้")
-        setError(true);
-      }
-    });
+      .then((response) => response.json())
+      .then((res) => {
+        if (res.data) {
+          console.log("บันทึกได้")
+          setSuccess(true);
+          setErrorMessage("")
+        } else {
+          console.log("บันทึกไม่ได้")
+          setError(true);
+          setErrorMessage(res.error)
+        }
+      });
   }
 
   return (
-    <Container className={classes.container} maxWidth="md">
+    <div>
       <NavBar />
-      <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          บันทึกคำร้องสำเร็จ
-        </Alert>
-      </Snackbar>
-      <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-          บันทึกคำร้องไม่สำเร็จ
-        </Alert>
-      </Snackbar>
-      <Paper className={classes.paper}>
-        <Box display="flex">
-          <Box flexGrow={1}>
-            <Typography
-              component="h2"
-              variant="h6"
-              color="primary"
-              gutterBottom
-            >
-              บันทึกคำร้อง
-            </Typography>
+      <div className={classes.drawerHeader} />
+      <Container className={classes.container} maxWidth="md">
+        <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            บันทึกคำร้องสำเร็จ
+          </Alert>
+        </Snackbar>
+        <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error">
+            บันทึกคำร้องไม่สำเร็จ: {errorMessage}
+          </Alert>
+        </Snackbar>
+        <Paper className={classes.paper}>
+          <Box display="flex">
+            <Box flexGrow={1}>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                gutterBottom
+              >
+                บันทึกคำร้อง
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <Divider />
-        <Grid container spacing={3} className={classes.root}>
-          <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>นักศึกษา</p>
-              <Select
-                native
-                disabled
-                value={requestexam.StudentID}
-                
-              >
+          <Divider />
+          <Grid container spacing={3} className={classes.root}>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>นักศึกษา</p>
+                <Select
+                  native
+                  disabled
+                  value={requestexam.StudentID}
+
+                >
                   <option aria-label="None" value="">
-                    {students?.Name}
+                  {students?.ID_student} {students?.Name}
                   </option>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={3}>
-          <FormControl fullWidth variant="outlined">
-              <p>ภาคการศึกษา</p>
-              <Select
-                native
-                value={requestexam.SemesterID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "SemesterID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกภาคการศึกษา
-                </option>
-                {semesters.map((item: SemestersInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Semester}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={3}>
+              <FormControl fullWidth variant="outlined">
+                <p>ภาคการศึกษา</p>
+                <Select
+                  native
+                  value={requestexam.SemesterID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "SemesterID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกภาคการศึกษา
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
+                  {semesters.map((item: SemestersInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Semester}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
 
 
-         <Grid item xs={3}>
-           <FormControl fullWidth variant="outlined">
-           <p>ปีการศึกษา</p>
+            <Grid item xs={3}>
+              <FormControl fullWidth variant="outlined">
+                <p>ปีการศึกษา</p>
 
-            <TextField
+                <TextField
 
-              id="AcademicYear"
+                  id="AcademicYear"
 
-              variant="outlined"
+                  variant="outlined"
 
-              type="number"
+                  type="number"
 
-              size="medium"
+                  size="medium"
 
-              InputProps={{ inputProps: { min: 1 } }}
+                  InputProps={{ inputProps: { min: 1 } }}
 
-              InputLabelProps={{
+                  InputLabelProps={{
 
-                shrink: true,
+                    shrink: true,
 
-              }}
+                  }}
 
-              value={requestexam.AcademicYear || ""}
+                  value={requestexam.AcademicYear || ""}
 
-              onChange={handleInputChange}
+                  onChange={handleInputChange}
 
-            />
-           </FormControl>
-         </Grid>
-         <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>รายวิชา</p>
-              <Select
-                native
-                value={requestexam.CourseID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "CourseID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกวิชา
-                </option>
-                {courses.map((item:CoursesInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Coursename}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>รายวิชา</p>
+                <Select
+                  native
+                  value={requestexam.CourseID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "CourseID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกวิชา
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
+                  {courses.map((item: CoursesInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Coursename}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
 
-         
-          <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>อาจารย์ผู้สอน</p>
-              <Select
-                native
-                value={requestexam.TeacherID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "TeacherID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกอาจารย์ผู้สอน
-                </option>
-                {teachers.map((item:TeachersInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Name}
+
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>อาจารย์ผู้สอน</p>
+                <Select
+                  native
+                  value={requestexam.TeacherID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "TeacherID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกอาจารย์ผู้สอน
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
+                  {teachers.map((item: TeachersInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Name}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
 
-          <Grid item xs={6}>
-          <p>กรุณากรอกเบอร์ติดต่อของนักศึกษา</p>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                id="Tel"
-                variant="outlined"
-                type="string"
-                size="medium"
-                placeholder="กรุณากรอกห้องสอบ"
-                value={requestexam.Tel || ""}
-                onChange={handleInputChange}
-              />
-          </FormControl>
+            <Grid item xs={6}>
+              <p>กรุณากรอกเบอร์ติดต่อของนักศึกษา</p>
+              <FormControl fullWidth variant="outlined">
+                <TextField
+                  id="Tel"
+                  variant="outlined"
+                  type="string"
+                  size="medium"
+                  placeholder="กรุณากรอกเบอร์ติดต่อ"
+                  value={requestexam.Tel || ""}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
 
-         </Grid>
+            </Grid>
 
-          <Grid item xs={6}>
+            <Grid item xs={6}>
             <FormControl fullWidth variant="outlined">
               <p>สถานะคำร้อง</p>
               <Select
@@ -398,53 +411,52 @@ export default function RequestExamCreate() {
                 inputProps={{
                   name: "RequestStatusID",
                 }}
+                disabled
               >
-                <option aria-label="None" value="">
-                  กรุณาเลือกสถานะ
-                </option>
                 {requeststatuses.map((item:RequestStatusesInterface) => (
-                  <option value={item.ID} key={item.ID}>
+                  <option value={1} key={item.ID}>
                     {item.Status}
                   </option>
                 ))}
-              </Select>
-            </FormControl>
+                </Select>
+              </FormControl>
+            </Grid>
+
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>วันที่และเวลา</p>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDateTimePicker
+                    name="RequestExamTime"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    label="กรุณาเลือกวันที่และเวลา"
+                    minDate={new Date("2018-01-01T00:00")}
+                    format="yyyy/MM/dd hh:mm a"
+                  />
+                </MuiPickersUtilsProvider>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                component={RouterLink}
+                to="/request_exams"
+                variant="contained"
+              >
+                กลับ
+              </Button>
+              <Button
+                style={{ float: "right" }}
+                variant="contained"
+                onClick={submit}
+                color="primary"
+              >
+                บันทึก
+              </Button>
+            </Grid>
           </Grid>
-          
-          <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>วันที่และเวลา</p>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDateTimePicker
-                  name="RequestExamTime"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  label="กรุณาเลือกวันที่และเวลา"
-                  minDate={new Date("2018-01-01T00:00")}
-                  format="yyyy/MM/dd hh:mm a"
-                />
-              </MuiPickersUtilsProvider>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              component={RouterLink}
-              to="/request_exams"
-              variant="contained"
-            >
-              กลับ
-            </Button>
-            <Button
-              style={{ float: "right" }}
-              variant="contained"
-              onClick={submit}
-              color="primary"
-            >
-              บันทึก
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+        </Paper>
+      </Container>
+    </div>
   );
 }

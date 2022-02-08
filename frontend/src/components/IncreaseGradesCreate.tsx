@@ -17,11 +17,11 @@ import { StudentsInterface } from "../models/IStudent";
 import { CoursesInterface } from "../models/ICourse";
 import { GradesInterface } from "../models/IGrades";
 import { IncreaseGradesInterface } from "../models/IIncreaseGrades";
+import NavBar from "./Navbar";
 
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker, } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { TextField } from "@material-ui/core";
-import NavBar from "./Navbar";
 
 const Alert = (props: AlertProps) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -39,10 +39,18 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: theme.spacing(2),
             color: theme.palette.text.secondary,
         },
+        drawerHeader: {
+            display: 'flex',
+            alignItems: 'center',
+            padding: theme.spacing(0, 1),
+            // necessary for content to be below app bar
+            ...theme.mixins.toolbar,
+            justifyContent: 'flex-end',
+          },
     })
 );
 
-export default function IncreaseGradesCreate() {
+function IncreaseGradesCreate() {
     const classes = useStyles();
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
     const [increasegrades, setIncreaseGrades] = useState<Partial<IncreaseGradesInterface>>({});
@@ -180,6 +188,7 @@ export default function IncreaseGradesCreate() {
     return (
         <Container className={classes.container} maxWidth="sm">
             <NavBar />
+            <div className={classes.drawerHeader} />
             <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success">
                     บันทึกสำเร็จ
@@ -371,3 +380,5 @@ export default function IncreaseGradesCreate() {
         </Container>
     );
 }
+
+export default IncreaseGradesCreate;

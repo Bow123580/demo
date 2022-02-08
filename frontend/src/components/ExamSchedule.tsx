@@ -27,6 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
     tableSpace: {
       marginTop: 20,
     },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
   })
 );
 
@@ -36,8 +44,9 @@ export default function ExamSchedules() {
   const apiUrl = "http://localhost:8080";
   const requestOptions = {
     method: "GET",
-    headers: { Authorization: `Bearer ${localStorage.getItem("token")}`,
-    "Content-Type": "application/json",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
     },
   };
 
@@ -61,6 +70,7 @@ export default function ExamSchedules() {
   return (
     <div>
       <NavBar />
+      <div className={classes.drawerHeader} />
       <Container className={classes.container} maxWidth="lg">
         <Box display="flex">
           <Box flexGrow={2}>
@@ -123,8 +133,8 @@ export default function ExamSchedules() {
                   <TableCell align="center">{item.Course.Coursename}</TableCell>
                   <TableCell align="center">{item.RoomExam}</TableCell>
                   <TableCell align="center">{format((new Date(item.ExamDate)), 'dd MMMM yyyy')}</TableCell>
-                  <TableCell align="center">{format((new Date(item.StartTime)),'hh:mm a')}</TableCell>
-                  <TableCell align="center">{format((new Date(item.EndTime)),'hh:mm a')}</TableCell>
+                  <TableCell align="center">{format((new Date(item.StartTime)), 'hh:mm a')}</TableCell>
+                  <TableCell align="center">{format((new Date(item.EndTime)), 'hh:mm a')}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

@@ -22,7 +22,6 @@ import { ExamTypesInterface } from "../models/IExamType";
 import { SemestersInterface } from "../models/ISemester";
 import { CoursesInterface } from "../models/ICourse";
 import { ExamScheduleInterface } from "../models/IExamSchedule";
-import NavBar from "./Navbar";
 
 import {
   MuiPickersUtilsProvider,
@@ -31,7 +30,7 @@ import {
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { TextField } from "@material-ui/core";
-
+import NavBar from "./Navbar";
 
 const Alert = (props: AlertProps) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -49,10 +48,18 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       color: theme.palette.text.secondary,
     },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
   })
 );
 
-export default function ExamScheduleCreate() {
+export default function ExamScheduleCreate(this: any) {
   const classes = useStyles();
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectTimeStart, setSelectedTimeStart] = useState<Date | null>(new Date());
@@ -65,7 +72,6 @@ export default function ExamScheduleCreate() {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
 
   const apiUrl = "http://localhost:8080";
   const requestOptions = {
@@ -186,197 +192,198 @@ export default function ExamScheduleCreate() {
       .then((res) => {
         if (res.data) {
           setSuccess(true);
-          setErrorMessage("");
         } else {
           setError(true);
-          setErrorMessage(res.error);
         }
       });
   }
 
   return (
-    <Container className={classes.container} maxWidth="md">
+    <div>
       <NavBar />
-      <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          บันทึกตารางสอบสำเร็จ
-        </Alert>
-      </Snackbar>
-      <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-        บันทึกตารางสอบไม่สำเร็จ: {errorMessage}
-        </Alert>
-      </Snackbar>
-      <Paper className={classes.paper}>
-        <Box display="flex">
-          <Box flexGrow={1}>
-            <Typography
-              component="h2"
-              variant="h6"
-              color="primary"
-              gutterBottom
-            >
-              เพิ่มตารางสอบ
-            </Typography>
+      <div className={classes.drawerHeader} />
+      <Container className={classes.container} maxWidth="md">
+        <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            บันทึกตารางสอบสำเร็จ
+          </Alert>
+        </Snackbar>
+        <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error">
+            บันทึกตารางสอบไม่สำเร็จ
+          </Alert>
+        </Snackbar>
+        <Paper className={classes.paper}>
+          <Box display="flex">
+            <Box flexGrow={1}>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                gutterBottom
+              >
+                เพิ่มตารางสอบ
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <Divider />
-        <Grid container spacing={3} className={classes.root}>
-        <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>ภาคการศึกษา</p>
-              <Select
-                native
-                value={ExamSchedule.SemesterID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "SemesterID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกภาคการศึกษา
-                </option>
-                {Semesters.map((item: SemestersInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Semester}
+          <Divider />
+          <Grid container spacing={3} className={classes.root}>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>ภาคการศึกษา</p>
+                <Select
+                  native
+                  value={ExamSchedule.SemesterID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "SemesterID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกภาคการศึกษา
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-            <p>ปีการศึกษา</p>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                id="AcademicYear"
-                variant="outlined"
-                type="number"
-                size="medium"
-                placeholder="กรุณาปีการศึกษา"
-                value={ExamSchedule.AcademicYear || ""}
-                onChange={handleInputChange}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>ประเภทการจัดสอบ</p>
-              <Select
-                native
-                value={ExamSchedule.ExamTypeID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "ExamTypeID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกประเภทการจัดสอบ
-                </option>
-                {ExamTypes.map((item: ExamTypesInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Type}
+                  {Semesters.map((item: SemestersInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Semester}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <p>ปีการศึกษา</p>
+              <FormControl fullWidth variant="outlined">
+                <TextField
+                  id="AcademicYear"
+                  variant="outlined"
+                  type="number"
+                  size="medium"
+                  placeholder="กรุณาปีการศึกษา"
+                  value={ExamSchedule.AcademicYear || ""}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>ประเภทการจัดสอบ</p>
+                <Select
+                  native
+                  value={ExamSchedule.ExamTypeID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "ExamTypeID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกประเภทการจัดสอบ
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>ชื่อรายวิชา</p>
-              <Select
-                native
-                value={ExamSchedule.CourseID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "CourseID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกชื่อรายวิชา
-                </option>
-                {Courses.map((item: CoursesInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Coursenumber} - {item.Coursename}
+                  {ExamTypes.map((item: ExamTypesInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Type}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>ชื่อรายวิชา</p>
+                <Select
+                  native
+                  value={ExamSchedule.CourseID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "CourseID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกชื่อรายวิชา
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-            <p>ห้องสอบ</p>
-            <FormControl fullWidth variant="outlined">
-              <TextField
-                id="RoomExam"
-                variant="outlined"
-                type="string"
-                size="medium"
-                placeholder="กรุณากรอกห้องสอบ"
-                value={ExamSchedule.RoomExam || ""}
-                onChange={handleInputChange}
-              />
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>วันที่สอบ</p>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
-                  name="ExamDate"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  label="กรุณาเลือกวันสอบ"
-                  format="yyyy/MM/dd"
+                  {Courses.map((item: CoursesInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Coursenumber} - {item.Coursename}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <p>ห้องสอบ</p>
+              <FormControl fullWidth variant="outlined">
+                <TextField
+                  id="RoomExam"
+                  variant="outlined"
+                  type="string"
+                  size="medium"
+                  placeholder="กรุณากรอกห้องสอบ"
+                  value={ExamSchedule.RoomExam || ""}
+                  onChange={handleInputChange}
                 />
-              </MuiPickersUtilsProvider>
-            </FormControl>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>วันที่สอบ</p>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDatePicker
+                    name="ExamDate"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    label="กรุณาเลือกวันสอบ"
+                    format="yyyy/MM/dd"
+                  />
+                </MuiPickersUtilsProvider>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>เวลาเริ่มต้น</p>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardTimePicker
+                    name="StartTime"
+                    value={selectTimeStart}
+                    onChange={handleDateChange}
+                    label="กรุณาเลือกเวลาเริ่มต้น"
+                    format="hh:mm a"
+                  />
+                </MuiPickersUtilsProvider>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>เวลาสิ้นสุด</p>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardTimePicker
+                    name="EndTime"
+                    value={selectedTimeend}
+                    onChange={handleDateChange}
+                    label="กรุณาเลือกเวลาสิ้นสุด"
+                    format="hh:mm a"
+                  />
+                </MuiPickersUtilsProvider>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                component={RouterLink}
+                to="/examschedule"
+                variant="contained"
+              >
+                กลับ
+              </Button>
+              <Button
+                style={{ float: "right" }}
+                variant="contained"
+                onClick={submit}
+                color="primary"
+              >
+                บันทึก
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={6}>
-          <FormControl fullWidth variant="outlined">
-              <p>เวลาเริ่มต้น</p>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardTimePicker
-                  name="StartTime"
-                  value={selectTimeStart}
-                  onChange={handleDateChange}
-                  label="กรุณาเลือกเวลาเริ่มต้น"
-                  format="hh:mm a"
-                />
-              </MuiPickersUtilsProvider>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
-          <FormControl fullWidth variant="outlined">
-              <p>เวลาสิ้นสุด</p>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardTimePicker
-                  name="EndTime"
-                  value={selectedTimeend}
-                  onChange={handleDateChange}
-                  label="กรุณาเลือกเวลาสิ้นสุด"
-                  format="hh:mm a"
-                />
-              </MuiPickersUtilsProvider>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              component={RouterLink}
-              to="/examschedule"
-              variant="contained"
-            >
-              กลับ
-            </Button>
-            <Button
-              style={{ float: "right" }}
-              variant="contained"
-              onClick={submit}
-              color="primary"
-            >
-              บันทึก
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+        </Paper>
+      </Container>
+    </div>
   );
 }

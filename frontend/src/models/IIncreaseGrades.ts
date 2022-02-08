@@ -5,7 +5,7 @@ import { GradesInterface } from "./IGrades";
 export interface IncreaseGradesInterface {
   ID: number,
   Date: Date,
-  Credit: number,
+  GradePoint: number,
   Description: string,
   StudentID: number,
   Student: StudentsInterface,

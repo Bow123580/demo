@@ -18,7 +18,6 @@ import { CoursesInterface } from "../models/ICourse";
 import { ProgramsInterface } from "../models/IProgram";
 import { TeachersInterface } from "../models/ITeacher";
 import { AddCoursesInterface } from "../models/IAddCourse";
-import NavBar from "./Navbar";
 
 
 import {
@@ -26,6 +25,7 @@ import {
   KeyboardDateTimePicker,
 } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import NavBar from "./Navbar";
 
 const Alert = (props: AlertProps) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -43,6 +43,14 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       color: theme.palette.text.secondary,
     },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
   })
 );
 
@@ -58,7 +66,7 @@ export default function AddCourseCreate() {
 
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
-
+  const [errorMessage, setErrorMessage] = useState("");
   const apiUrl = "http://localhost:8080";
   const requestOptions = {
     method: "GET",
@@ -174,210 +182,215 @@ export default function AddCourseCreate() {
         if (res.data) {
           console.log("บันทึกได้")
           setSuccess(true);
+          setErrorMessage("");
         } else {
           console.log("บันทึกไม่ได้")
           setError(true);
+          setErrorMessage(res.error);
         }
       });
   }
 
   return (
-    <Container className={classes.container} maxWidth="sm">
+    <div>
       <NavBar />
-      <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          บันทึกข้อมูลสำเร็จ
-        </Alert>
-      </Snackbar>
-      <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-          บันทึกข้อมูลไม่สำเร็จ
-        </Alert>
-      </Snackbar>
-      <Paper className={classes.paper}>
-        <Box display="flex">
-          <Box flexGrow={1}>
-            <Typography
-              component="h2"
-              variant="h6"
-              color="primary"
-              gutterBottom
-            >
-              บันทึกการเพิ่มรายวิชา
-            </Typography>
+      <div className={classes.drawerHeader} />
+      <Container className={classes.container} maxWidth="sm">
+        <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            บันทึกข้อมูลสำเร็จ
+          </Alert>
+        </Snackbar>
+        <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error">
+          บันทึกข้อมูลไม่สำเร็จ: {errorMessage}
+          </Alert>
+        </Snackbar>
+        <Paper className={classes.paper}>
+          <Box display="flex">
+            <Box flexGrow={1}>
+              <Typography
+                component="h2"
+                variant="h6"
+                color="primary"
+                gutterBottom
+              >
+                บันทึกการเพิ่มรายวิชา
+              </Typography>
+            </Box>
           </Box>
-        </Box>
-        <Divider />
-        <Grid container spacing={3} className={classes.root}>
+          <Divider />
+          <Grid container spacing={3} className={classes.root}>
 
-          <Grid item xs={12}>
-            <FormControl fullWidth variant="outlined">
-              <Typography
-                color="textPrimary"
-              >
-                รหัสรายวิชา
-              </Typography>
-              <Select
-                native
-                value={addcourses.CourseID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "CourseID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกรหัสรายวิชา
-                </option>
-                {courses.map((item: CoursesInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Coursenumber} - {item.Coursename}
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined">
+                <Typography
+                  color="textPrimary"
+                >
+                  รายวิชา
+                </Typography>
+                <Select
+                  native
+                  value={addcourses.CourseID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "CourseID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกรหัสรายวิชา
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
+                  {courses.map((item: CoursesInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Coursenumber} - {item.Coursename}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
 
-          <Grid item xs={12}>
-            <FormControl fullWidth variant="outlined">
-              <Typography
-                color="textPrimary"
-              >
-                หลักสูตร
-              </Typography>
-              <Select
-                native
-                value={addcourses.ProgramID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "ProgramID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกหลักสูตร
-                </option>
-                {programs.map((item: ProgramsInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Programname}
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined">
+                <Typography
+                  color="textPrimary"
+                >
+                  หลักสูตร
+                </Typography>
+                <Select
+                  native
+                  value={addcourses.ProgramID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "ProgramID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกหลักสูตร
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
+                  {programs.map((item: ProgramsInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Programname}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
 
-          <Grid item xs={12}>
-            <FormControl fullWidth variant="outlined">
-              <Typography
-                color="textPrimary"
-              >
-                อาจารย์ผู้สอน
-              </Typography>
-              <Select
-                native
-                value={addcourses.TeacherID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "TeacherID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกอาจารย์ผู้สอน
-                </option>
-                {teachers.map((item: TeachersInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Name}
+            <Grid item xs={12}>
+              <FormControl fullWidth variant="outlined">
+                <Typography
+                  color="textPrimary"
+                >
+                  อาจารย์ผู้สอน
+                </Typography>
+                <Select
+                  native
+                  value={addcourses.TeacherID}
+                  onChange={handleChange}
+                  inputProps={{
+                    name: "TeacherID",
+                  }}
+                >
+                  <option aria-label="None" value="">
+                    กรุณาเลือกอาจารย์ผู้สอน
                   </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}>
+                  {teachers.map((item: TeachersInterface) => (
+                    <option value={item.ID} key={item.ID}>
+                      {item.Name}
+                    </option>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={6}>
 
-            <p>จำนวนหน่วยกิต</p>
+              <p>จำนวนหน่วยกิต</p>
 
-            <FormControl fullWidth variant="outlined">
+              <FormControl fullWidth variant="outlined">
 
-              <TextField
+                <TextField
 
-                id="Credit"
+                  id="Credit"
 
-                variant="outlined"
+                  variant="outlined"
 
-                type="number"
+                  type="number"
 
-                size="medium"
+                  size="medium"
 
-                InputProps={{ inputProps: { min: 1} }}
+                  InputProps={{ inputProps: { min: 1 } }}
 
-                InputLabelProps={{ shrink: true,}}
+                  InputLabelProps={{ shrink: true, }}
 
-                value={addcourses.Credit || ""}
+                  value={addcourses.Credit || ""}
 
-                onChange={handleInputChange}
+                  onChange={handleInputChange}
 
-              />
-
-            </FormControl>
-
-          </Grid> 
-          <Grid item xs={6}>
-
-            <p>วันที่และเวลาที่สอน</p>
-
-            <FormControl fullWidth variant="outlined">
-
-              <TextField
-
-                id="DayTime"
-
-                variant="outlined"
-
-                type="string"
-
-                size="medium"
-
-                value={addcourses.DayTime }
-
-                onChange={handleInputChange}
-
-              />
-
-            </FormControl>
-
-          </Grid> 
-          <Grid item xs={6}>
-            <FormControl fullWidth variant="outlined">
-              <p>วันที่และเวลาที่บันทึก</p>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDateTimePicker
-                  name="SaveTime"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  label="กรุณาเลือกวันที่และเวลา"
-                  minDate={new Date("2018-01-01T00:00")}
-                  format="yyyy/MM/dd hh:mm a"
                 />
-              </MuiPickersUtilsProvider>
-            </FormControl>
+
+              </FormControl>
+
+            </Grid>
+            <Grid item xs={6}>
+
+              <p>วันที่และเวลาที่สอน</p>
+
+              <FormControl fullWidth variant="outlined">
+
+                <TextField
+
+                  id="DayTime"
+
+                  variant="outlined"
+
+                  type="string"
+
+                  size="medium"
+
+                  value={addcourses.DayTime}
+
+                  onChange={handleInputChange}
+
+                />
+
+              </FormControl>
+
+            </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth variant="outlined">
+                <p>วันที่และเวลาที่บันทึก</p>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <KeyboardDateTimePicker
+                    name="SaveTime"
+                    value={selectedDate}
+                    onChange={handleDateChange}
+                    label="กรุณาเลือกวันที่และเวลา"
+                    minDate={new Date("2018-01-01T00:00")}
+                    format="yyyy/MM/dd hh:mm a"
+                  />
+                </MuiPickersUtilsProvider>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                component={RouterLink}
+                to="/addcourse"
+                variant="contained"
+              >
+                กลับ
+              </Button>
+              <Button
+                style={{ float: "right" }}
+                variant="contained"
+                onClick={submit}
+                color="primary"
+              >
+                บันทึก
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Button
-              component={RouterLink}
-              to="/addcourse"
-              variant="contained"
-            >
-              กลับ
-            </Button>
-            <Button
-              style={{ float: "right" }}
-              variant="contained"
-              onClick={submit}
-              color="primary"
-            >
-              บันทึก
-            </Button>
-          </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+        </Paper>
+      </Container>
+    </div>
   );
 }

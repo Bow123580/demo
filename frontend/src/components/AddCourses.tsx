@@ -27,6 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
     tableSpace: {
       marginTop: 10,
     },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
   })
 );
 
@@ -48,7 +56,7 @@ export default function AddCourses() {
       .then((res) => {
         console.log(res.data);
         if (res.data) {
-            setAddCourses(res.data);
+          setAddCourses(res.data);
         } else {
           console.log("else");
         }
@@ -62,6 +70,7 @@ export default function AddCourses() {
   return (
     <div>
       <NavBar />
+      <div className={classes.drawerHeader} />
       <Container className={classes.container} maxWidth="md">
         <Box display="flex">
           <Box flexGrow={1}>
@@ -118,7 +127,7 @@ export default function AddCourses() {
                   <TableCell align="center">{item.Course.Coursename}</TableCell>
                   <TableCell align="center">{item.Course.Coursenumber}</TableCell>
                   <TableCell align="center">{item.Program.Programname}</TableCell>
-                  <TableCell align="center">{item.Teacher.Name}</TableCell> 
+                  <TableCell align="center">{item.Teacher.Name}</TableCell>
                   <TableCell align="center">{item.Credit}</TableCell>
                   <TableCell align="center">{item.DayTime}</TableCell>
                   <TableCell align="center">{format((new Date(item.SaveTime)), 'dd MMMM yyyy hh:mm a')}</TableCell>

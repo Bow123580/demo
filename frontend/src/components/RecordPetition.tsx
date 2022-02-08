@@ -28,6 +28,8 @@ import DateFnsUtils from "@date-io/date-fns";
 import NavBar from "./Navbar";
 
 
+
+
 const Alert = (props: AlertProps) => {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 };
@@ -44,6 +46,14 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(2),
       color: theme.palette.text.secondary,
     },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
   })
 );
 
@@ -54,7 +64,7 @@ export default function RecordPetitionCreate() {
   const [courses, setCourses] = useState<CoursesInterface[]>([]);
   const [recordpetition, setRecordPetition] = useState<Partial<RecordPetitionInterface>>({});
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  
+
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -67,7 +77,7 @@ export default function RecordPetitionCreate() {
     },
   };
 
-const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+  const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }
@@ -176,21 +186,23 @@ const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
 
 
   return (
-    
-<Container className={classes.container} maxWidth="md">
-<NavBar />
-      <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          บันทึกคำร้องสำเร็จ
-        </Alert>
-      </Snackbar>
-      <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="error">
-          บันทึกคำร้องไม่สำเร็จ
-        </Alert>
-      </Snackbar>
-      
-      <br></br>
+    <div>
+      <NavBar />
+      <div className={classes.drawerHeader} />
+      <Container className={classes.container} maxWidth="md">
+
+        <Snackbar open={success} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="success">
+            บันทึกคำร้องสำเร็จ
+          </Alert>
+        </Snackbar>
+        <Snackbar open={error} autoHideDuration={6000} onClose={handleClose}>
+          <Alert onClose={handleClose} severity="error">
+            บันทึกคำร้องไม่สำเร็จ
+          </Alert>
+        </Snackbar>
+
+        <br></br>
 
         <Box display="flex">
           <Box flexGrow={1}>
@@ -208,58 +220,58 @@ const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
 
 
         <Grid item xs={8}>
-            <FormControl fullWidth variant="outlined">
-              <p>ผู้เข้าใช้ระบบ</p>
-              <Select
-                native
-                disabled
-                value={recordpetition.StudentID}
-                // onChange={handleChange}
-                // inputProps={{
-                //   name: "UserID",
-                // }}
-              >
-                <option aria-label="None" value="">
-                    {students?.ID_student}
-                  </option>
-             
-              </Select>
-            </FormControl>
-          </Grid>
-
-        
-          <Grid item xs={8}>
-            <FormControl fullWidth variant="outlined">
-              <p>คำร้อง</p>
-              <Select
-                native
-                value={recordpetition.PetitionID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "PetitionID",
-                }}
-              >
-                <option aria-label="None" value="">
-                  กรุณาเลือกคำร้อง
-                </option>
-                {petitions.map((item: PetitionsInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Claim}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
-
-           <br></br> <br></br>  
-
-          <Grid item xs={8}>
-             <FormControl fullWidth variant="outlined">
+          <FormControl fullWidth variant="outlined">
+            <p>ผู้เข้าใช้ระบบ</p>
+            <Select
+              native
+              disabled
+              value={recordpetition.StudentID}
+            // onChange={handleChange}
+            // inputProps={{
+            //   name: "UserID",
+            // }}
+            >
               <option aria-label="None" value="">
-              เหตุผลที่ต้องการลงทะเบียนเรียนเกิน/ต่ำกว่าหน่วยกิตที่กำหนด
+                {students?.ID_student}
               </option>
-              
-              <br></br> 
+
+            </Select>
+          </FormControl>
+        </Grid>
+
+
+        <Grid item xs={8}>
+          <FormControl fullWidth variant="outlined">
+            <p>คำร้อง</p>
+            <Select
+              native
+              value={recordpetition.PetitionID}
+              onChange={handleChange}
+              inputProps={{
+                name: "PetitionID",
+              }}
+            >
+              <option aria-label="None" value="">
+                กรุณาเลือกคำร้อง
+              </option>
+              {petitions.map((item: PetitionsInterface) => (
+                <option value={item.ID} key={item.ID}>
+                  {item.Claim}
+                </option>
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
+
+        <br></br> <br></br>
+
+        <Grid item xs={8}>
+          <FormControl fullWidth variant="outlined">
+            <option aria-label="None" value="">
+              เหตุผลที่ต้องการลงทะเบียนเรียนเกิน/ต่ำกว่าหน่วยกิตที่กำหนด
+            </option>
+
+            <br></br>
 
             <TextField
               id="Because"
@@ -272,18 +284,18 @@ const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
               value={recordpetition.Because || ""}
               onChange={handleChange}
             />
-            </FormControl>
-          </Grid> 
+          </FormControl>
+        </Grid>
 
-          <br></br> <br></br>  
+        <br></br> <br></br>
 
 
-          <Grid item xs={8}>
-             <FormControl fullWidth variant="outlined">
-              <option aria-label="None" value="">
+        <Grid item xs={8}>
+          <FormControl fullWidth variant="outlined">
+            <option aria-label="None" value="">
               หน่วยกิตทั้งหมดที่ต้องการลงทะเบียนเรียน
-              </option>
-              <br></br>  
+            </option>
+            <br></br>
 
             <TextField
               id="RegisteredCredit"
@@ -296,66 +308,65 @@ const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
               value={recordpetition.RegisteredCredit || ""}
               onChange={handleChange}
             />
-            </FormControl>
-          </Grid>              
-                
-          <br></br>  <br></br>  
-          
-          <Grid item xs={8}>
-            <FormControl fullWidth variant="outlined">
-              <p>เลือกรหัสวิชาที่ต้องการยื่นคำร้องลงทะเบียนเรียนเกิน/ต่ำกว่าหน่วยกิตที่กำหนด</p>
-              <Select
-                native
-                value={recordpetition.CourseID}
-                onChange={handleChange}
-                inputProps={{
-                  name: "CourseID",
-                }}
-              >   
+          </FormControl>
+        </Grid>
+
+        <br></br>  <br></br>
+
+        <Grid item xs={8}>
+          <FormControl fullWidth variant="outlined">
+            <p>เลือกรหัสวิชาที่ต้องการยื่นคำร้องลงทะเบียนเรียนเกิน/ต่ำกว่าหน่วยกิตที่กำหนด</p>
+            <Select
+              native
+              value={recordpetition.CourseID}
+              onChange={handleChange}
+              inputProps={{
+                name: "CourseID",
+              }}
+            >
               <br></br>
 
-                <option aria-label="None" value="">
+              <option aria-label="None" value="">
                 เลือกรหัสวิชา
+              </option>
+              {courses.map((item: CoursesInterface) => (
+                <option value={item.ID} key={item.ID}>
+                  {item.Coursenumber}
                 </option>
-                {courses.map((item: CoursesInterface) => (
-                  <option value={item.ID} key={item.ID}>
-                    {item.Coursenumber}
-                  </option>
-                ))}
-              </Select>
-            </FormControl>
-            </Grid>   
+              ))}
+            </Select>
+          </FormControl>
+        </Grid>
 
-            <br></br>  
+        <br></br>
 
-             <Grid item xs={8}>
-            <FormControl fullWidth variant="outlined">
-              <p>วันที่และเวลาที่บันทึกคำร้อง</p>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDateTimePicker
-                  name="TimeRecord"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  label="กรุณาเลือกวันที่และเวลา"
-                  minDate={new Date("2018-01-01T00:00")}
-                  format="yyyy/MM/dd hh:mm a"
-                />
-              </MuiPickersUtilsProvider>
-            </FormControl>
-          </Grid>      
+        <Grid item xs={8}>
+          <FormControl fullWidth variant="outlined">
+            <p>วันที่และเวลาที่บันทึกคำร้อง</p>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDateTimePicker
+                name="TimeRecord"
+                value={selectedDate}
+                onChange={handleDateChange}
+                label="กรุณาเลือกวันที่และเวลา"
+                minDate={new Date("2018-01-01T00:00")}
+                format="yyyy/MM/dd hh:mm a"
+              />
+            </MuiPickersUtilsProvider>
+          </FormControl>
+        </Grid>
 
-          <br></br>  <br></br>  
+        <br></br>  <br></br>
 
-            <Button
-              style={{ float: "left" }}
-              variant="contained"
-              onClick={submit}
-              color="primary"
-            >
-              บันทึกคำร้อง
-            </Button>
-           
-    </Container>
-
+        <Button
+          style={{ float: "left" }}
+          variant="contained"
+          onClick={submit}
+          color="primary"
+        >
+          บันทึกคำร้อง
+        </Button>
+      </Container>
+    </div >
   );
 }
