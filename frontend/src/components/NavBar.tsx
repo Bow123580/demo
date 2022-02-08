@@ -233,7 +233,7 @@ export default function NavBar() {
                     }}
                 >
                     <div className={classes.drawerHeader}>
-                         นายทะเบียน
+                         ฝ่ายทะเบียน
                         <IconButton onClick={handleDrawerClose}>
                             {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
                         </IconButton>
